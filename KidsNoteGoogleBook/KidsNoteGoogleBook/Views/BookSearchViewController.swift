@@ -16,33 +16,126 @@ class BookSearchViewController: UIViewController {
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
     
+    private let segmentedControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: ["eBook", "오디오북"])
+        control.selectedSegmentIndex = 0
+        control.addTarget(BookSearchViewController.self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+        return control
+    }()
+    
+    private let resultLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Google Play 검색결과"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private let noResultsLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.textAlignment = .center
+        label.textColor = .gray
+        label.isHidden = true
+        return label
+    }()
+    
+    private let errorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "네트워크 오류"
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
+    
+    private let errorMsgLabel: UILabel = {
+        let label = UILabel()
+        label.text = "인터넷 연결을 확인한 다음 다시 시도해 주세요."
+        label.isHidden = true
+        label.textAlignment = .center
+        label.textColor = .gray
+        return label
+    }()
+    
+    private let retryButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.layer.cornerRadius = 4
+        button.setTitle("다시 시도", for: .normal)
+        button.backgroundColor = .systemTeal
+        button.addTarget(BookSearchViewController.self, action: #selector(retryButtonTapped), for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
+        setupUI()
         setupSearchController()
         bindViewModel()
+       
     }
     
-    private func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    private func setupUI() {
+        view.addSubview(segmentedControl)
+        view.addSubview(resultLabel)
+        view.addSubview(noResultsLabel)
+        view.addSubview(errorLabel)
+        view.addSubview(errorMsgLabel)
+        view.addSubview(retryButton)
         view.addSubview(tableView)
+        
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        resultLabel.translatesAutoresizingMaskIntoConstraints = false
+        noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorMsgLabel.translatesAutoresizingMaskIntoConstraints = false
+        retryButton.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            resultLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
+            resultLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            resultLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            noResultsLabel.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 8),
+            noResultsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            noResultsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            errorLabel.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 20),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            errorMsgLabel.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 15),
+            errorMsgLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            retryButton.topAnchor.constraint(equalTo: errorMsgLabel.bottomAnchor, constant: 15),
+            retryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            retryButton.widthAnchor.constraint(equalToConstant: 100),
+            retryButton.heightAnchor.constraint(equalToConstant: 35),
+            
+            tableView.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 16),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     private func setupSearchController() {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Play 북에서 검색"
-        tableView.tableHeaderView = searchController.searchBar
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
     
@@ -50,25 +143,56 @@ class BookSearchViewController: UIViewController {
         viewModel.$state
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
-                switch state {
-                case .idle:
-                    break
-                case .loading:
-                    // Show loading indicator if needed
-                    break
-                case .loaded(let books):
-                    self?.tableView.reloadData()
-                case .error(let message):
-                    self?.searchController.dismiss(animated: true) { // SearchController를 먼저 닫습니다.
-                        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default))
-                        self?.present(alert, animated: true)
-                    }
-                @unknown default:
-                    break
-                }
+                guard let self = self else { return }
+                self.updateUI(for: state)
             }
             .store(in: &cancellables)
+    }
+    
+    private func updateUI(for state: State) {
+        switch state {
+        case .idle:
+            segmentedControl.isHidden = true
+            noResultsLabel.isHidden = true
+            errorLabel.isHidden = true
+            retryButton.isHidden = true
+            resultLabel.isHidden = true
+        case .loading:
+            noResultsLabel.isHidden = true
+            errorLabel.isHidden = true
+            errorMsgLabel.isHidden = true
+            retryButton.isHidden = true
+        case .loaded(let books):
+            segmentedControl.isHidden = false
+            resultLabel.isHidden = false
+            noResultsLabel.isHidden = !books.isEmpty
+            tableView.reloadData()
+            tableView.isHidden = books.isEmpty
+        case .error(let message):
+            segmentedControl.isHidden = false
+            resultLabel.isHidden = false
+            noResultsLabel.isHidden = true
+            errorLabel.isHidden = false
+            errorMsgLabel.isHidden = false
+            retryButton.isHidden = false
+            tableView.isHidden = true
+        case .noResults(let message):
+            noResultsLabel.text = message
+            noResultsLabel.isHidden = false
+            tableView.isHidden = true
+        @unknown default:
+            break
+        }
+    }
+    
+    @objc private func retryButtonTapped() {
+        if let query = searchController.searchBar.text, !query.isEmpty {
+            viewModel.searchBooks(query: query)
+        }
+    }
+    
+    @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        viewModel.filterContent(by: sender.selectedSegmentIndex)
     }
 }
 
@@ -105,7 +229,4 @@ extension BookSearchViewController: UISearchBarDelegate {
         viewModel.searchBooks(query: query)
     }
 }
-
-
-
 
