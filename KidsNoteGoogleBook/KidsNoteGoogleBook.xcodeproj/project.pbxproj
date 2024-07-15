@@ -1,0 +1,620 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5982C44E3D900841711 /* AppDelegate.swift */; };
+		73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC59A2C44E3D900841711 /* SceneDelegate.swift */; };
+		73FCC59D2C44E3D900841711 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC59C2C44E3D900841711 /* ViewController.swift */; };
+		73FCC5A02C44E3D900841711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 73FCC59F2C44E3D900841711 /* Base */; };
+		73FCC5A22C44E3DC00841711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73FCC5A12C44E3DC00841711 /* Assets.xcassets */; };
+		73FCC5A52C44E3DC00841711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 73FCC5A42C44E3DC00841711 /* Base */; };
+		73FCC5B02C44E3DC00841711 /* KidsNoteGoogleBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5AF2C44E3DC00841711 /* KidsNoteGoogleBookTests.swift */; };
+		73FCC5BA2C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5B92C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift */; };
+		73FCC5BC2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5BB2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		73FCC5AC2C44E3DC00841711 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73FCC58D2C44E3D900841711 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73FCC5942C44E3D900841711;
+			remoteInfo = KidsNoteGoogleBook;
+		};
+		73FCC5B62C44E3DD00841711 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73FCC58D2C44E3D900841711 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73FCC5942C44E3D900841711;
+			remoteInfo = KidsNoteGoogleBook;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		73FCC5952C44E3D900841711 /* KidsNoteGoogleBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsNoteGoogleBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		73FCC5982C44E3D900841711 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		73FCC59A2C44E3D900841711 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		73FCC59C2C44E3D900841711 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		73FCC59F2C44E3D900841711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		73FCC5A12C44E3DC00841711 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		73FCC5A42C44E3DC00841711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		73FCC5A62C44E3DC00841711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73FCC5AB2C44E3DC00841711 /* KidsNoteGoogleBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KidsNoteGoogleBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		73FCC5AF2C44E3DC00841711 /* KidsNoteGoogleBookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNoteGoogleBookTests.swift; sourceTree = "<group>"; };
+		73FCC5B52C44E3DD00841711 /* KidsNoteGoogleBookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KidsNoteGoogleBookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		73FCC5B92C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNoteGoogleBookUITests.swift; sourceTree = "<group>"; };
+		73FCC5BB2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNoteGoogleBookUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		73FCC5922C44E3D900841711 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73FCC5A82C44E3DC00841711 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73FCC5B22C44E3DD00841711 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		73FCC58C2C44E3D900841711 = {
+			isa = PBXGroup;
+			children = (
+				73FCC5972C44E3D900841711 /* KidsNoteGoogleBook */,
+				73FCC5AE2C44E3DC00841711 /* KidsNoteGoogleBookTests */,
+				73FCC5B82C44E3DD00841711 /* KidsNoteGoogleBookUITests */,
+				73FCC5962C44E3D900841711 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		73FCC5962C44E3D900841711 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5952C44E3D900841711 /* KidsNoteGoogleBook.app */,
+				73FCC5AB2C44E3DC00841711 /* KidsNoteGoogleBookTests.xctest */,
+				73FCC5B52C44E3DD00841711 /* KidsNoteGoogleBookUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73FCC5972C44E3D900841711 /* KidsNoteGoogleBook */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5982C44E3D900841711 /* AppDelegate.swift */,
+				73FCC59A2C44E3D900841711 /* SceneDelegate.swift */,
+				73FCC59C2C44E3D900841711 /* ViewController.swift */,
+				73FCC59E2C44E3D900841711 /* Main.storyboard */,
+				73FCC5A12C44E3DC00841711 /* Assets.xcassets */,
+				73FCC5A32C44E3DC00841711 /* LaunchScreen.storyboard */,
+				73FCC5A62C44E3DC00841711 /* Info.plist */,
+			);
+			path = KidsNoteGoogleBook;
+			sourceTree = "<group>";
+		};
+		73FCC5AE2C44E3DC00841711 /* KidsNoteGoogleBookTests */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5AF2C44E3DC00841711 /* KidsNoteGoogleBookTests.swift */,
+			);
+			path = KidsNoteGoogleBookTests;
+			sourceTree = "<group>";
+		};
+		73FCC5B82C44E3DD00841711 /* KidsNoteGoogleBookUITests */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5B92C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift */,
+				73FCC5BB2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift */,
+			);
+			path = KidsNoteGoogleBookUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		73FCC5942C44E3D900841711 /* KidsNoteGoogleBook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73FCC5BF2C44E3DD00841711 /* Build configuration list for PBXNativeTarget "KidsNoteGoogleBook" */;
+			buildPhases = (
+				73FCC5912C44E3D900841711 /* Sources */,
+				73FCC5922C44E3D900841711 /* Frameworks */,
+				73FCC5932C44E3D900841711 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KidsNoteGoogleBook;
+			productName = KidsNoteGoogleBook;
+			productReference = 73FCC5952C44E3D900841711 /* KidsNoteGoogleBook.app */;
+			productType = "com.apple.product-type.application";
+		};
+		73FCC5AA2C44E3DC00841711 /* KidsNoteGoogleBookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73FCC5C22C44E3DD00841711 /* Build configuration list for PBXNativeTarget "KidsNoteGoogleBookTests" */;
+			buildPhases = (
+				73FCC5A72C44E3DC00841711 /* Sources */,
+				73FCC5A82C44E3DC00841711 /* Frameworks */,
+				73FCC5A92C44E3DC00841711 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				73FCC5AD2C44E3DC00841711 /* PBXTargetDependency */,
+			);
+			name = KidsNoteGoogleBookTests;
+			productName = KidsNoteGoogleBookTests;
+			productReference = 73FCC5AB2C44E3DC00841711 /* KidsNoteGoogleBookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		73FCC5B42C44E3DD00841711 /* KidsNoteGoogleBookUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73FCC5C52C44E3DD00841711 /* Build configuration list for PBXNativeTarget "KidsNoteGoogleBookUITests" */;
+			buildPhases = (
+				73FCC5B12C44E3DD00841711 /* Sources */,
+				73FCC5B22C44E3DD00841711 /* Frameworks */,
+				73FCC5B32C44E3DD00841711 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				73FCC5B72C44E3DD00841711 /* PBXTargetDependency */,
+			);
+			name = KidsNoteGoogleBookUITests;
+			productName = KidsNoteGoogleBookUITests;
+			productReference = 73FCC5B52C44E3DD00841711 /* KidsNoteGoogleBookUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		73FCC58D2C44E3D900841711 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					73FCC5942C44E3D900841711 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					73FCC5AA2C44E3DC00841711 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 73FCC5942C44E3D900841711;
+					};
+					73FCC5B42C44E3DD00841711 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 73FCC5942C44E3D900841711;
+					};
+				};
+			};
+			buildConfigurationList = 73FCC5902C44E3D900841711 /* Build configuration list for PBXProject "KidsNoteGoogleBook" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 73FCC58C2C44E3D900841711;
+			productRefGroup = 73FCC5962C44E3D900841711 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				73FCC5942C44E3D900841711 /* KidsNoteGoogleBook */,
+				73FCC5AA2C44E3DC00841711 /* KidsNoteGoogleBookTests */,
+				73FCC5B42C44E3DD00841711 /* KidsNoteGoogleBookUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		73FCC5932C44E3D900841711 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73FCC5A22C44E3DC00841711 /* Assets.xcassets in Resources */,
+				73FCC5A52C44E3DC00841711 /* Base in Resources */,
+				73FCC5A02C44E3D900841711 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73FCC5A92C44E3DC00841711 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73FCC5B32C44E3DD00841711 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		73FCC5912C44E3D900841711 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73FCC59D2C44E3D900841711 /* ViewController.swift in Sources */,
+				73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */,
+				73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73FCC5A72C44E3DC00841711 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73FCC5B02C44E3DC00841711 /* KidsNoteGoogleBookTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73FCC5B12C44E3DD00841711 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73FCC5BA2C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift in Sources */,
+				73FCC5BC2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		73FCC5AD2C44E3DC00841711 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73FCC5942C44E3D900841711 /* KidsNoteGoogleBook */;
+			targetProxy = 73FCC5AC2C44E3DC00841711 /* PBXContainerItemProxy */;
+		};
+		73FCC5B72C44E3DD00841711 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73FCC5942C44E3D900841711 /* KidsNoteGoogleBook */;
+			targetProxy = 73FCC5B62C44E3DD00841711 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		73FCC59E2C44E3D900841711 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73FCC59F2C44E3D900841711 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		73FCC5A32C44E3DC00841711 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73FCC5A42C44E3DC00841711 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		73FCC5BD2C44E3DD00841711 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		73FCC5BE2C44E3DD00841711 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		73FCC5C02C44E3DD00841711 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L6GNE8467;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KidsNoteGoogleBook/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seunggi.KidsNoteGoogleBook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		73FCC5C12C44E3DD00841711 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L6GNE8467;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KidsNoteGoogleBook/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seunggi.KidsNoteGoogleBook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		73FCC5C32C44E3DD00841711 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L6GNE8467;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seunggi.KidsNoteGoogleBookTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KidsNoteGoogleBook.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KidsNoteGoogleBook";
+			};
+			name = Debug;
+		};
+		73FCC5C42C44E3DD00841711 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L6GNE8467;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seunggi.KidsNoteGoogleBookTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KidsNoteGoogleBook.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KidsNoteGoogleBook";
+			};
+			name = Release;
+		};
+		73FCC5C62C44E3DD00841711 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L6GNE8467;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seunggi.KidsNoteGoogleBookUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KidsNoteGoogleBook;
+			};
+			name = Debug;
+		};
+		73FCC5C72C44E3DD00841711 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L6GNE8467;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seunggi.KidsNoteGoogleBookUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KidsNoteGoogleBook;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		73FCC5902C44E3D900841711 /* Build configuration list for PBXProject "KidsNoteGoogleBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73FCC5BD2C44E3DD00841711 /* Debug */,
+				73FCC5BE2C44E3DD00841711 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73FCC5BF2C44E3DD00841711 /* Build configuration list for PBXNativeTarget "KidsNoteGoogleBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73FCC5C02C44E3DD00841711 /* Debug */,
+				73FCC5C12C44E3DD00841711 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73FCC5C22C44E3DD00841711 /* Build configuration list for PBXNativeTarget "KidsNoteGoogleBookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73FCC5C32C44E3DD00841711 /* Debug */,
+				73FCC5C42C44E3DD00841711 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73FCC5C52C44E3DD00841711 /* Build configuration list for PBXNativeTarget "KidsNoteGoogleBookUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73FCC5C62C44E3DD00841711 /* Debug */,
+				73FCC5C72C44E3DD00841711 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 73FCC58D2C44E3D900841711 /* Project object */;
+}
