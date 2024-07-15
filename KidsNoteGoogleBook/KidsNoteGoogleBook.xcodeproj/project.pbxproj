@@ -18,6 +18,7 @@
 		73FCC5E32C44EFC300841711 /* KidsNoteGoogleBookTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */; };
 		73FCC5E42C44EFC300841711 /* KidsNoteGoogleBookTask.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73FCC5FD2C4517C100841711 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */; };
+		73FCC6002C4573EE00841711 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5FF2C4573EE00841711 /* BookTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		73FCC5C92C44E5DE00841711 /* BookSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewController.swift; sourceTree = "<group>"; };
 		73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KidsNoteGoogleBookTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		73FCC5FF2C4573EE00841711 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		73FCC5972C44E3D900841711 /* KidsNoteGoogleBook */ = {
 			isa = PBXGroup;
 			children = (
+				73FCC5FE2C4573DB00841711 /* Cell */,
 				73FCC5F32C45118500841711 /* Views */,
 				73FCC5982C44E3D900841711 /* AppDelegate.swift */,
 				73FCC59A2C44E3D900841711 /* SceneDelegate.swift */,
@@ -160,6 +163,14 @@
 				73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		73FCC5FE2C4573DB00841711 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5FF2C4573EE00841711 /* BookTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +307,7 @@
 				73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */,
 				73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */,
 				73FCC5FD2C4517C100841711 /* BookDetailViewController.swift in Sources */,
+				73FCC6002C4573EE00841711 /* BookTableViewCell.swift in Sources */,
 				73FCC5CA2C44E5DE00841711 /* BookSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,7 +19,6 @@ class BookSearchViewController: UIViewController {
     private let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["eBook", "오디오북"])
         control.selectedSegmentIndex = 0
-        control.addTarget(BookSearchViewController.self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         return control
     }()
     
@@ -35,7 +34,7 @@ class BookSearchViewController: UIViewController {
         let label = UILabel()
         label.text = ""
         label.textAlignment = .center
-        label.textColor = .gray
+        label.textColor = .secondaryLabel
         label.isHidden = true
         return label
     }()
@@ -45,6 +44,7 @@ class BookSearchViewController: UIViewController {
         label.text = "네트워크 오류"
         label.font = UIFont.boldSystemFont(ofSize: 25)
         label.textAlignment = .center
+        label.textColor = .label
         label.isHidden = true
         return label
     }()
@@ -54,7 +54,7 @@ class BookSearchViewController: UIViewController {
         label.text = "인터넷 연결을 확인한 다음 다시 시도해 주세요."
         label.isHidden = true
         label.textAlignment = .center
-        label.textColor = .gray
+        label.textColor = .secondaryLabel
         return label
     }()
     
@@ -63,7 +63,7 @@ class BookSearchViewController: UIViewController {
         button.layer.cornerRadius = 4
         button.setTitle("다시 시도", for: .normal)
         button.backgroundColor = .systemTeal
-        button.addTarget(BookSearchViewController.self, action: #selector(retryButtonTapped), for: .touchUpInside)
+        
         button.isHidden = true
         return button
     }()
@@ -74,7 +74,9 @@ class BookSearchViewController: UIViewController {
         setupUI()
         setupSearchController()
         bindViewModel()
-       
+        
+        tableView.register(BookTableViewCell.self, forCellReuseIdentifier: "BookTableViewCell")
+        
     }
     
     private func setupUI() {
@@ -85,6 +87,11 @@ class BookSearchViewController: UIViewController {
         view.addSubview(errorMsgLabel)
         view.addSubview(retryButton)
         view.addSubview(tableView)
+        
+        view.backgroundColor = .systemBackground
+        
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+        retryButton.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         resultLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -134,6 +141,8 @@ class BookSearchViewController: UIViewController {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Play 북에서 검색"
+        searchController.searchBar.backgroundColor = .clear
+        searchController.searchBar.tintColor = .label
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
@@ -168,7 +177,7 @@ class BookSearchViewController: UIViewController {
             noResultsLabel.isHidden = !books.isEmpty
             tableView.reloadData()
             tableView.isHidden = books.isEmpty
-        case .error(let message):
+        case .error( _):
             segmentedControl.isHidden = false
             resultLabel.isHidden = false
             noResultsLabel.isHidden = true
@@ -205,10 +214,12 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookTableViewCell", for: indexPath) as? BookTableViewCell else {
+            return UITableViewCell()
+        }
         if case let .loaded(books) = viewModel.state {
             let book = books[indexPath.row]
-            cell.textLabel?.text = book.volumeInfo.title
+            cell.configure(with: book) 
         }
         return cell
     }
