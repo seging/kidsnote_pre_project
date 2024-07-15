@@ -14,7 +14,10 @@
 		73FCC5B02C44E3DC00841711 /* KidsNoteGoogleBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5AF2C44E3DC00841711 /* KidsNoteGoogleBookTests.swift */; };
 		73FCC5BA2C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5B92C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift */; };
 		73FCC5BC2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5BB2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift */; };
-		73FCC5CA2C44E5DE00841711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5C92C44E5DE00841711 /* HomeViewController.swift */; };
+		73FCC5CA2C44E5DE00841711 /* BookSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5C92C44E5DE00841711 /* BookSearchViewController.swift */; };
+		73FCC5E32C44EFC300841711 /* KidsNoteGoogleBookTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */; };
+		73FCC5E42C44EFC300841711 /* KidsNoteGoogleBookTask.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		73FCC5FD2C4517C100841711 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		73FCC5E52C44EFC300841711 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				73FCC5E42C44EFC300841711 /* KidsNoteGoogleBookTask.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		73FCC5952C44E3D900841711 /* KidsNoteGoogleBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsNoteGoogleBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FCC5982C44E3D900841711 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +63,9 @@
 		73FCC5B52C44E3DD00841711 /* KidsNoteGoogleBookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KidsNoteGoogleBookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FCC5B92C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNoteGoogleBookUITests.swift; sourceTree = "<group>"; };
 		73FCC5BB2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNoteGoogleBookUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		73FCC5C92C44E5DE00841711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		73FCC5C92C44E5DE00841711 /* BookSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewController.swift; sourceTree = "<group>"; };
+		73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KidsNoteGoogleBookTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73FCC5E32C44EFC300841711 /* KidsNoteGoogleBookTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +101,7 @@
 				73FCC5AE2C44E3DC00841711 /* KidsNoteGoogleBookTests */,
 				73FCC5B82C44E3DD00841711 /* KidsNoteGoogleBookUITests */,
 				73FCC5962C44E3D900841711 /* Products */,
+				73FCC5E12C44EFC300841711 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,9 +118,9 @@
 		73FCC5972C44E3D900841711 /* KidsNoteGoogleBook */ = {
 			isa = PBXGroup;
 			children = (
+				73FCC5F32C45118500841711 /* Views */,
 				73FCC5982C44E3D900841711 /* AppDelegate.swift */,
 				73FCC59A2C44E3D900841711 /* SceneDelegate.swift */,
-				73FCC5C82C44E5C200841711 /* Home */,
 				73FCC5A12C44E3DC00841711 /* Assets.xcassets */,
 				73FCC5A32C44E3DC00841711 /* LaunchScreen.storyboard */,
 				73FCC5A62C44E3DC00841711 /* Info.plist */,
@@ -124,12 +145,21 @@
 			path = KidsNoteGoogleBookUITests;
 			sourceTree = "<group>";
 		};
-		73FCC5C82C44E5C200841711 /* Home */ = {
+		73FCC5E12C44EFC300841711 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				73FCC5C92C44E5DE00841711 /* HomeViewController.swift */,
+				73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */,
 			);
-			path = Home;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73FCC5F32C45118500841711 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5C92C44E5DE00841711 /* BookSearchViewController.swift */,
+				73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +172,7 @@
 				73FCC5912C44E3D900841711 /* Sources */,
 				73FCC5922C44E3D900841711 /* Frameworks */,
 				73FCC5932C44E3D900841711 /* Resources */,
+				73FCC5E52C44EFC300841711 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -264,7 +295,8 @@
 			files = (
 				73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */,
 				73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */,
-				73FCC5CA2C44E5DE00841711 /* HomeViewController.swift in Sources */,
+				73FCC5FD2C4517C100841711 /* BookDetailViewController.swift in Sources */,
+				73FCC5CA2C44E5DE00841711 /* BookSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +475,8 @@
 				INFOPLIST_FILE = KidsNoteGoogleBook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -475,7 +508,8 @@
 				INFOPLIST_FILE = KidsNoteGoogleBook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
