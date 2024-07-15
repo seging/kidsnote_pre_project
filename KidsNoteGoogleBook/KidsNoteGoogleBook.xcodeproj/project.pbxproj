@@ -9,13 +9,12 @@
 /* Begin PBXBuildFile section */
 		73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5982C44E3D900841711 /* AppDelegate.swift */; };
 		73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC59A2C44E3D900841711 /* SceneDelegate.swift */; };
-		73FCC59D2C44E3D900841711 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC59C2C44E3D900841711 /* ViewController.swift */; };
-		73FCC5A02C44E3D900841711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 73FCC59F2C44E3D900841711 /* Base */; };
 		73FCC5A22C44E3DC00841711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73FCC5A12C44E3DC00841711 /* Assets.xcassets */; };
 		73FCC5A52C44E3DC00841711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 73FCC5A42C44E3DC00841711 /* Base */; };
 		73FCC5B02C44E3DC00841711 /* KidsNoteGoogleBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5AF2C44E3DC00841711 /* KidsNoteGoogleBookTests.swift */; };
 		73FCC5BA2C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5B92C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift */; };
 		73FCC5BC2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5BB2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift */; };
+		73FCC5CA2C44E5DE00841711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5C92C44E5DE00841711 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +38,6 @@
 		73FCC5952C44E3D900841711 /* KidsNoteGoogleBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsNoteGoogleBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FCC5982C44E3D900841711 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73FCC59A2C44E3D900841711 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		73FCC59C2C44E3D900841711 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		73FCC59F2C44E3D900841711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73FCC5A12C44E3DC00841711 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73FCC5A42C44E3DC00841711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73FCC5A62C44E3DC00841711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +46,7 @@
 		73FCC5B52C44E3DD00841711 /* KidsNoteGoogleBookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KidsNoteGoogleBookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FCC5B92C44E3DD00841711 /* KidsNoteGoogleBookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNoteGoogleBookUITests.swift; sourceTree = "<group>"; };
 		73FCC5BB2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNoteGoogleBookUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		73FCC5C92C44E5DE00841711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +99,7 @@
 			children = (
 				73FCC5982C44E3D900841711 /* AppDelegate.swift */,
 				73FCC59A2C44E3D900841711 /* SceneDelegate.swift */,
-				73FCC59C2C44E3D900841711 /* ViewController.swift */,
-				73FCC59E2C44E3D900841711 /* Main.storyboard */,
+				73FCC5C82C44E5C200841711 /* Home */,
 				73FCC5A12C44E3DC00841711 /* Assets.xcassets */,
 				73FCC5A32C44E3DC00841711 /* LaunchScreen.storyboard */,
 				73FCC5A62C44E3DC00841711 /* Info.plist */,
@@ -125,6 +122,14 @@
 				73FCC5BB2C44E3DD00841711 /* KidsNoteGoogleBookUITestsLaunchTests.swift */,
 			);
 			path = KidsNoteGoogleBookUITests;
+			sourceTree = "<group>";
+		};
+		73FCC5C82C44E5C200841711 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5C92C44E5DE00841711 /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +238,6 @@
 			files = (
 				73FCC5A22C44E3DC00841711 /* Assets.xcassets in Resources */,
 				73FCC5A52C44E3DC00841711 /* Base in Resources */,
-				73FCC5A02C44E3D900841711 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +262,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73FCC59D2C44E3D900841711 /* ViewController.swift in Sources */,
 				73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */,
 				73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */,
+				73FCC5CA2C44E5DE00841711 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +301,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		73FCC59E2C44E3D900841711 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				73FCC59F2C44E3D900841711 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		73FCC5A32C44E3DC00841711 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

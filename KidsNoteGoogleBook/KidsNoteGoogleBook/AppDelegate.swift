@@ -10,10 +10,14 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // window를 초기화하고 루트 뷰 컨트롤러 설정
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = HomeViewController() // 초기 뷰 컨트롤러 지정
+        window?.makeKeyAndVisible() // Key Window로 설정하고 화면에 표시
+        
         return true
     }
 
