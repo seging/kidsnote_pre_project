@@ -9,58 +9,82 @@ import UIKit
 
 class CustomSegmentedButton: UIButton {
     
-    private let highlightOverlay: UIView
-    
+    private let highlightLayer: CAShapeLayer = CAShapeLayer()
     private var isAnimating: Bool = false
     
-    override var isHighlighted: Bool {
-        didSet {
-            if isHighlighted && !isAnimating {
-                showHighlightOverlay()
-            } else if !isHighlighted {
-                hideHighlightOverlay()
-            }
-        }
-    }
-    
-    
     override init(frame: CGRect) {
-        highlightOverlay = UIView(frame: frame)
-        highlightOverlay.backgroundColor = UIColor.selectedTab.withAlphaComponent(0.5)
-        highlightOverlay.isHidden = true
         super.init(frame: frame)
         setupButton()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        highlightOverlay = UIView()
-        highlightOverlay.backgroundColor = UIColor.selectedTab.withAlphaComponent(0.5)
-        highlightOverlay.isHidden = true
         super.init(coder: aDecoder)
         setupButton()
     }
     
     private func setupButton() {
-        highlightOverlay.frame = bounds
-        highlightOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(highlightOverlay)
+        highlightLayer.fillColor = UIColor.selectedTab.withAlphaComponent(0.3).cgColor
+        highlightLayer.isHidden = true
+        self.layer.addSublayer(highlightLayer)
         self.clipsToBounds = true
         self.backgroundColor = .clear
     }
     
-    private func showHighlightOverlay() {
-        highlightOverlay.isHidden = false
-        highlightOverlay.transform = CGAffineTransform(scaleX: 0.0, y: 1.0)
-        UIView.animate(withDuration: 0.3, animations: {
-            self.highlightOverlay.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        }) { _ in
+    private func animateHighlightLayer() {
+        guard !isAnimating else { return }
+        isAnimating = true
+        highlightLayer.isHidden = false
+        let startPath = UIBezierPath(ovalIn: CGRect(x: bounds.midX - 1, y: bounds.midY - 1, width: 2, height: 2)).cgPath
+        let endPath = UIBezierPath(ovalIn: bounds.insetBy(dx: -bounds.width * 0.8, dy: -bounds.height * 2)).cgPath
+        
+        highlightLayer.path = startPath
+        
+        let pathAnimation = CABasicAnimation(keyPath: "path")
+        pathAnimation.fromValue = startPath
+        pathAnimation.toValue = endPath
+        pathAnimation.duration = 0.4
+        pathAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        pathAnimation.fillMode = .forwards
+        pathAnimation.isRemovedOnCompletion = false
+        
+        let opacityAnimation = CABasicAnimation(keyPath: "opacity")
+        opacityAnimation.fromValue = 1.0
+        opacityAnimation.toValue = 1.0
+        opacityAnimation.duration = 0.3
+        opacityAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        opacityAnimation.fillMode = .forwards
+        opacityAnimation.isRemovedOnCompletion = false
+        
+        highlightLayer.add(pathAnimation, forKey: "pathAnimation")
+        highlightLayer.add(opacityAnimation, forKey: "opacityAnimation")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.isAnimating = false
         }
     }
     
-    private func hideHighlightOverlay() {
-        self.highlightOverlay.isHidden = true
-        self.isAnimating = false
+    private func hideHighlightLayer() {
+        guard !isAnimating else { return }
+        isAnimating = true
+        
+        let opacityAnimation = CABasicAnimation(keyPath: "opacity")
+        opacityAnimation.fromValue = 1.0
+        opacityAnimation.toValue = 0.0
+        opacityAnimation.duration = 0.3
+        opacityAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        opacityAnimation.fillMode = .forwards
+        opacityAnimation.isRemovedOnCompletion = false
+        highlightLayer.add(opacityAnimation, forKey: "opacityAnimation")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.highlightLayer.isHidden = true
+            self.isAnimating = false
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        animateHighlightLayer()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -69,8 +93,23 @@ class CustomSegmentedButton: UIButton {
         let location = touch.location(in: self)
         
         if !self.bounds.contains(location) {
-            self.isHighlighted = false
+            hideHighlightLayer()
+        } else {
+            animateHighlightLayer()
         }
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        isAnimating = false
+        hideHighlightLayer()
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        hideHighlightLayer()
+    }
 }
+
+
 
