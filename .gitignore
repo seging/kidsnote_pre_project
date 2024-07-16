@@ -1,2 +1,4 @@
 *.xcworkspace/xcuserdata/
 *.xcworkspace/xcuserdata/*
+*.xcodeproj/xcuserdata/*/xcschemes/xcschememanagement.plist
+*.xcodeproj/xcuserdata/*/xcschememanagement.plist
