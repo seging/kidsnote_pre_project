@@ -96,6 +96,8 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
             return 0
         case .loading, .loaded, .error, .noResults:
             return 1
+        @unknown default:
+            return 0
         }
     }
     
@@ -111,6 +113,8 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
             return 3 // Segment Control + Result Label + Error
         case .noResults:
             return 3 // Segment Control + Result Label + No Results
+        @unknown default:
+            return 0
         }
     }
     
@@ -198,6 +202,11 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 return cell
             }
+        @unknown default:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "NoResultsTableViewCell", for: indexPath) as? NoResultsTableViewCell else {
+                return UITableViewCell()
+            }
+            return cell
         }
     }
     

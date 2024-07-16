@@ -8,11 +8,7 @@
 import Foundation
 
 class BookManager {
-    private let apiService: GoogleBooksAPIService
-    
-    init(apiService: GoogleBooksAPIService = GoogleBooksAPIService()) {
-        self.apiService = apiService
-    }
+    private let apiService: GoogleBooksAPIService = GoogleBooksAPIService.shared
     
     func searchBooks(query: String) async throws -> [BookItem]? {
         let response = try await apiService.searchBooks(query: query)

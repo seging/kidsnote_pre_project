@@ -6,6 +6,7 @@
 //
 import Foundation
 import Combine
+import UIKit
 
 public enum State {
     case idle
@@ -25,15 +26,37 @@ public class BookSearchViewModel: ObservableObject {
     
     public func searchBooks(query: String) {
         state = .loading
-        
+        ImageCacheManager.shared.clearCache()
         Task {
             do {
-                let books = try await GoogleBooksAPIService().searchBooks(query: query)
+                let books = try await GoogleBooksAPIService.shared.searchBooks(query: query)
                 self.allBooks = books.items
-                filterContent(by: selectedIdx)
+                preloadImages(for: books.items)
             } catch {
                 self.state = .error(error.localizedDescription)
             }
+        }
+    }
+    
+    private func preloadImages(for books: [BookItem]?) {
+        guard let books = books else {
+            self.state = .noResults("\(selectedIdx == 0 ? "eBook" : "오디오북") 검색결과 없음")
+            return
+        }
+        
+        let imageURLs = books.compactMap { $0.volumeInfo.imageLinks?.thumbnail }.compactMap { URL(string: $0) }
+        
+        let group = DispatchGroup()
+        
+        for url in imageURLs {
+            group.enter()
+            UIImageView.loadImage(from: url) { _ in
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.filterContent(by: self.selectedIdx)
         }
     }
     

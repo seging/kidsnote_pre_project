@@ -115,13 +115,9 @@ class BookTableViewCell: UITableViewCell {
         eBookLabel.text = "eBook"
         
         if let imageURL = book.volumeInfo.imageLinks?.thumbnail, let url = URL(string: imageURL) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        self.bookImageView.image = UIImage(data: data)
-                    }
-                }
-            }.resume()
+            UIImageView.loadImage(from: url) { image in
+                self.bookImageView.image = image
+            }
         }
     }
 }

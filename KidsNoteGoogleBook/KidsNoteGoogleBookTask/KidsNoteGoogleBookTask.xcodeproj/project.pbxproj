@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73DA38632C468B9600BE8B35 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DA38622C468B9600BE8B35 /* ImageCacheManager.swift */; };
+		73DA38662C46908700BE8B35 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DA38652C46908700BE8B35 /* UIImageView+Cache.swift */; };
 		73FCC5D92C44E8D000841711 /* KidsNoteGoogleBookTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 73FCC5D82C44E8D000841711 /* KidsNoteGoogleBookTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73FCC5E72C44F8CD00841711 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5E62C44F8CD00841711 /* NetworkService.swift */; };
 		73FCC5EB2C45080800841711 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5EA2C45080800841711 /* Book.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73DA38622C468B9600BE8B35 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		73DA38652C46908700BE8B35 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		73FCC5D52C44E8D000841711 /* KidsNoteGoogleBookTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KidsNoteGoogleBookTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FCC5D82C44E8D000841711 /* KidsNoteGoogleBookTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KidsNoteGoogleBookTask.h; sourceTree = "<group>"; };
 		73FCC5DF2C44EDEA00841711 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -42,6 +46,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73DA38612C468B7400BE8B35 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				73DA38622C468B9600BE8B35 /* ImageCacheManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		73DA38642C46906600BE8B35 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				73DA38652C46908700BE8B35 /* UIImageView+Cache.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		73FCC5CB2C44E8D000841711 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +84,8 @@
 				73FCC5E02C44EE5100841711 /* Info.plist */,
 				73FCC5D82C44E8D000841711 /* KidsNoteGoogleBookTask.h */,
 				73FCC5DF2C44EDEA00841711 /* Config.xcconfig */,
+				73DA38642C46906600BE8B35 /* Extension */,
+				73DA38612C468B7400BE8B35 /* Manager */,
 				73FCC5F72C45135F00841711 /* ViewModels */,
 				73FCC5E92C4507FD00841711 /* Models */,
 				73FCC5E82C4507F300841711 /* Network */,
@@ -183,6 +205,8 @@
 				73FCC5ED2C450B7400841711 /* GoogleBooksAPIService.swift in Sources */,
 				73FCC5F92C45136B00841711 /* BookSearchViewModel.swift in Sources */,
 				73FCC5F02C450D6A00841711 /* Config.swift in Sources */,
+				73DA38632C468B9600BE8B35 /* ImageCacheManager.swift in Sources */,
+				73DA38662C46908700BE8B35 /* UIImageView+Cache.swift in Sources */,
 				73FCC5EB2C45080800841711 /* Book.swift in Sources */,
 				73FCC5F22C45113A00841711 /* BookManager.swift in Sources */,
 				73FCC5E72C44F8CD00841711 /* NetworkService.swift in Sources */,

@@ -9,11 +9,11 @@ import Foundation
 
 
 class GoogleBooksAPIService {
-    private let networkService: NetworkServiceProtocol
+    private let networkService: NetworkServiceProtocol = NetworkService.shared
     
-    init(networkService: NetworkServiceProtocol = NetworkService.shared) {
-        self.networkService = networkService
-    }
+    static let shared = GoogleBooksAPIService()
+        
+    private init() {}
     
     func searchBooks(query: String) async throws -> BookResponse {
         let queryItems:String = [
