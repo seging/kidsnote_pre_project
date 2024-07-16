@@ -19,6 +19,12 @@
 		73FCC5E42C44EFC300841711 /* KidsNoteGoogleBookTask.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73FCC5FD2C4517C100841711 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */; };
 		73FCC6002C4573EE00841711 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5FF2C4573EE00841711 /* BookTableViewCell.swift */; };
+		73FCC6022C462AD900841711 /* ResultLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC6012C462AD900841711 /* ResultLabelTableViewCell.swift */; };
+		73FCC6042C462AF000841711 /* NoResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC6032C462AF000841711 /* NoResultsTableViewCell.swift */; };
+		73FCC6062C462B1100841711 /* NetworkErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC6052C462B1100841711 /* NetworkErrorTableViewCell.swift */; };
+		73FCC6082C462BAA00841711 /* SegmentedControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC6072C462BAA00841711 /* SegmentedControlTableViewCell.swift */; };
+		73FCC60A2C462D0500841711 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC6092C462D0500841711 /* CustomSegmentedControl.swift */; };
+		73FCC60D2C4645AA00841711 /* CustomSegmentedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC60C2C4645AA00841711 /* CustomSegmentedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +74,12 @@
 		73FCC5E22C44EFC300841711 /* KidsNoteGoogleBookTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KidsNoteGoogleBookTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		73FCC5FF2C4573EE00841711 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		73FCC6012C462AD900841711 /* ResultLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultLabelTableViewCell.swift; sourceTree = "<group>"; };
+		73FCC6032C462AF000841711 /* NoResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsTableViewCell.swift; sourceTree = "<group>"; };
+		73FCC6052C462B1100841711 /* NetworkErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorTableViewCell.swift; sourceTree = "<group>"; };
+		73FCC6072C462BAA00841711 /* SegmentedControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlTableViewCell.swift; sourceTree = "<group>"; };
+		73FCC6092C462D0500841711 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		73FCC60C2C4645AA00841711 /* CustomSegmentedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +132,8 @@
 		73FCC5972C44E3D900841711 /* KidsNoteGoogleBook */ = {
 			isa = PBXGroup;
 			children = (
-				73FCC5FE2C4573DB00841711 /* Cell */,
+				73FCC60B2C46459600841711 /* Buttons */,
+				73FCC5FE2C4573DB00841711 /* Cells */,
 				73FCC5F32C45118500841711 /* Views */,
 				73FCC5982C44E3D900841711 /* AppDelegate.swift */,
 				73FCC59A2C44E3D900841711 /* SceneDelegate.swift */,
@@ -161,16 +174,29 @@
 			children = (
 				73FCC5C92C44E5DE00841711 /* BookSearchViewController.swift */,
 				73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */,
+				73FCC6092C462D0500841711 /* CustomSegmentedControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		73FCC5FE2C4573DB00841711 /* Cell */ = {
+		73FCC5FE2C4573DB00841711 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				73FCC5FF2C4573EE00841711 /* BookTableViewCell.swift */,
+				73FCC6072C462BAA00841711 /* SegmentedControlTableViewCell.swift */,
+				73FCC6012C462AD900841711 /* ResultLabelTableViewCell.swift */,
+				73FCC6032C462AF000841711 /* NoResultsTableViewCell.swift */,
+				73FCC6052C462B1100841711 /* NetworkErrorTableViewCell.swift */,
 			);
-			path = Cell;
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		73FCC60B2C46459600841711 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC60C2C4645AA00841711 /* CustomSegmentedButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,11 +330,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73FCC6042C462AF000841711 /* NoResultsTableViewCell.swift in Sources */,
+				73FCC6062C462B1100841711 /* NetworkErrorTableViewCell.swift in Sources */,
 				73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */,
 				73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */,
 				73FCC5FD2C4517C100841711 /* BookDetailViewController.swift in Sources */,
+				73FCC6022C462AD900841711 /* ResultLabelTableViewCell.swift in Sources */,
 				73FCC6002C4573EE00841711 /* BookTableViewCell.swift in Sources */,
+				73FCC60A2C462D0500841711 /* CustomSegmentedControl.swift in Sources */,
+				73FCC60D2C4645AA00841711 /* CustomSegmentedButton.swift in Sources */,
 				73FCC5CA2C44E5DE00841711 /* BookSearchViewController.swift in Sources */,
+				73FCC6082C462BAA00841711 /* SegmentedControlTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
