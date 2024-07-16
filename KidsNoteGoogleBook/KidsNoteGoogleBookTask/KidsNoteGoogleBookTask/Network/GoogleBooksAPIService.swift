@@ -15,12 +15,15 @@ class GoogleBooksAPIService {
         
     private init() {}
     
-    func searchBooks(query: String) async throws -> BookResponse {
+    func searchBooks(query: String, startIndex:Int) async throws -> BookResponse {
         let queryItems:String = [
-            "intitle:\(query)"
-        ].joined(separator: "+")
+            query,
+            "startIndex=\(startIndex)",
+            "maxResults=20",
+            "key=\(Config.apiKey)"
+        ].joined(separator: "&")
         let encodedQuery = queryItems.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let urlString = "https://www.googleapis.com/books/v1/volumes?q=\(encodedQuery)&key=\(Config.apiKey)"
+        let urlString = "https://www.googleapis.com/books/v1/volumes?q=\(encodedQuery)"
         
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)

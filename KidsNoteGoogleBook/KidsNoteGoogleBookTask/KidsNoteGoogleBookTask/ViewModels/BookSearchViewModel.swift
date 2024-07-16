@@ -4,6 +4,7 @@
 //
 //  Created by 이승기 on 7/15/24.
 //
+
 import Foundation
 import Combine
 import UIKit
@@ -18,29 +19,96 @@ public enum State {
 
 public class BookSearchViewModel: ObservableObject {
     @Published public var state: State = .idle
-    private var allBooks: [BookItem]?
-    private var selectedIdx: Int = 0 // 초기화면에서 eBook컨텐츠 보여주도록 설정
-    public init() {
-        
-    }
+    private var allBooks: [BookItem] = []
+    private var selectedIdx: Int = 0 // 초기화면에서 eBook 컨텐츠 보여주도록 설정
+    private var currentPage: Int = 0
+    private var isLoadingPage: Bool = false
+    private var query: String = ""
+    private var hasMorePages: Bool = true
+    private let booksPerPage: Int = 10
+    private var cache: [BookItem] = [] // 캐시를 단순화하여 배열로 저장
+    
+    public init() {}
     
     public func searchBooks(query: String) {
-        state = .loading
+        self.query = query
+        self.currentPage = 0
+        self.allBooks = []
+        self.cache = []
+        self.hasMorePages = true
+        self.state = .loading
         ImageCacheManager.shared.clearCache()
+        loadNextPage()
+    }
+    
+    public func loadNextPage() {
+        guard !isLoadingPage, hasMorePages else { return }
+        isLoadingPage = true
+        
         Task {
             do {
-                let books = try await GoogleBooksAPIService.shared.searchBooks(query: query)
-                self.allBooks = books.items
-                preloadImages(for: books.items)
+                var totalFilteredBooks: [BookItem] = []
+                var seenBooks = Set<BookItem>()
+                
+                // 캐시에서 필요한 만큼 가져오기
+                while totalFilteredBooks.count < booksPerPage && !cache.isEmpty {
+                    let book = cache.removeFirst()
+                    if !seenBooks.contains(book) {
+                        totalFilteredBooks.append(book)
+                        seenBooks.insert(book)
+                    }
+                }
+                
+                // API 요청으로 추가 가져오기
+                while totalFilteredBooks.count < booksPerPage && hasMorePages {
+                    let books = try await GoogleBooksAPIService.shared.searchBooks(query: query, startIndex: currentPage * booksPerPage)
+                    if let items = books.items, !items.isEmpty {
+                        let filteredBooks = items.filter { self.isBookValid(book: $0) }
+                        for book in filteredBooks {
+                            if !seenBooks.contains(book) {
+                                if totalFilteredBooks.count <= booksPerPage {
+                                    totalFilteredBooks.append(book)
+                                    seenBooks.insert(book)
+                                } else {
+                                    cache.append(book) // 나머지는 캐시에 저장
+                                }
+                            }
+                        }
+                        self.currentPage += 1
+                    } else {
+                        hasMorePages = false
+                    }
+                }
+                
+                self.allBooks.append(contentsOf: totalFilteredBooks)
+                
+                self.preloadImages(for: totalFilteredBooks)
+                self.isLoadingPage = false
+                
+                if totalFilteredBooks.isEmpty && cache.isEmpty {
+                    self.state = .noResults("검색결과 없음")
+                } else {
+                    self.state = .loaded(self.allBooks)
+                }
             } catch {
                 self.state = .error(error.localizedDescription)
+                self.isLoadingPage = false
             }
         }
     }
     
+    func isBookValid(book: BookItem) -> Bool {
+        let volumeInfo = book.volumeInfo
+        guard let readingModes = volumeInfo.readingModes else { return false }
+        let isValidBook = readingModes.text || readingModes.image
+        let hasImageLinks = volumeInfo.imageLinks != nil
+        let isEbookVisible = book.accessInfo?.epub?.isAvailable == true || book.accessInfo?.pdf?.isAvailable == true
+        return isValidBook && hasImageLinks && isEbookVisible
+    }
+    
     private func preloadImages(for books: [BookItem]?) {
-        guard let books = books else {
-            self.state = .noResults("\(selectedIdx == 0 ? "eBook" : "오디오북") 검색결과 없음")
+        guard let books = books, !books.isEmpty else {
+            self.state = .noResults("eBook 검색결과 없음")
             return
         }
         
@@ -62,16 +130,31 @@ public class BookSearchViewModel: ObservableObject {
     
     public func filterContent(by index: Int) {
         selectedIdx = index
-        guard let books = self.allBooks else {
+        guard !allBooks.isEmpty else {
             state = .noResults("\(index == 0 ? "eBook" : "오디오북") 검색결과 없음")
             return
         }
         if index == 0 {
             // eBook 필터
-            state = .loaded(books.filter { $0.saleInfo != nil && $0.saleInfo!.isEbook == true})
+            state = .loaded(allBooks.filter { $0.saleInfo?.isEbook == true })
         } else if index == 1 {
             // audioBook 필터
-            state = .loaded(books.filter { $0.accessInfo?.textToSpeechPermission == "ALLOWED"})
+            state = .loaded(allBooks.filter { $0.accessInfo?.textToSpeechPermission == "ALLOWED" })
         }
     }
 }
+
+extension BookItem: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    public static func == (lhs: BookItem, rhs: BookItem) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+
+
+
+

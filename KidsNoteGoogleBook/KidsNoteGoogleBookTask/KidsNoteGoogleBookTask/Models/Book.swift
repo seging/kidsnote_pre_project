@@ -37,6 +37,12 @@ public struct VolumeInfo: Codable {
     public let ratingsCount: Int?
     public let imageLinks: ImageLinks?
     public let language: String
+    public let readingModes: ReadingModes?
+}
+
+public struct ReadingModes: Codable {
+    public let text:Bool
+    public let image:Bool
 }
 
 public struct IndustryIdentifier: Codable {
