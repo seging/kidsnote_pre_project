@@ -86,7 +86,7 @@ public class BookSearchViewModel: ObservableObject {
                 self.isLoadingPage = false
                 
                 if totalFilteredBooks.isEmpty && cache.isEmpty {
-                    self.state = .noResults("검색결과 없음")
+                    self.showNoDataMsg()
                 } else {
                     self.state = .loaded(self.allBooks)
                 }
@@ -100,15 +100,16 @@ public class BookSearchViewModel: ObservableObject {
     func isBookValid(book: BookItem) -> Bool {
         let volumeInfo = book.volumeInfo
         guard let readingModes = volumeInfo.readingModes else { return false }
+        guard let accessInfo = book.accessInfo else { return false }
         let isValidBook = readingModes.text || readingModes.image
         let hasImageLinks = volumeInfo.imageLinks != nil
-        let isEbookVisible = book.accessInfo?.epub?.isAvailable == true || book.accessInfo?.pdf?.isAvailable == true
+        let isEbookVisible = accessInfo.epub?.isAvailable == true || accessInfo.pdf?.isAvailable == true
         return isValidBook && hasImageLinks && isEbookVisible
     }
     
     private func preloadImages(for books: [BookItem]?) {
         guard let books = books, !books.isEmpty else {
-            self.state = .noResults("eBook 검색결과 없음")
+            self.showNoDataMsg()
             return
         }
         
@@ -131,7 +132,7 @@ public class BookSearchViewModel: ObservableObject {
     public func filterContent(by index: Int) {
         selectedIdx = index
         guard !allBooks.isEmpty else {
-            state = .noResults("\(index == 0 ? "eBook" : "오디오북") 검색결과 없음")
+            self.showNoDataMsg()
             return
         }
         if index == 0 {
@@ -141,6 +142,10 @@ public class BookSearchViewModel: ObservableObject {
             // audioBook 필터
             state = .loaded(allBooks.filter { $0.accessInfo?.textToSpeechPermission == "ALLOWED" })
         }
+    }
+    
+    private func showNoDataMsg() {
+        state = .noResults("\(selectedIdx == 0 ? "eBook" : "오디오북") 검색결과 없음")
     }
 }
 

@@ -15,6 +15,7 @@ class BookSearchViewController: UIViewController {
     
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
+    private let refreshControl = CustomRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class BookSearchViewController: UIViewController {
         tableView.register(ResultLabelTableViewCell.self, forCellReuseIdentifier: "ResultLabelTableViewCell")
         tableView.register(NoResultsTableViewCell.self, forCellReuseIdentifier: "NoResultsTableViewCell")
         tableView.register(NetworkErrorTableViewCell.self, forCellReuseIdentifier: "NetworkErrorTableViewCell")
+        tableView.register(LoadingCell.self, forCellReuseIdentifier: "LoadingCell")
         
     }
     
@@ -51,6 +53,8 @@ class BookSearchViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
     }
     
     private func setupSearchController() {
@@ -76,6 +80,9 @@ class BookSearchViewController: UIViewController {
     
     private func updateUI(for state: State) {
         tableView.reloadData()
+        if refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
+        }
     }
     
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -86,6 +93,14 @@ class BookSearchViewController: UIViewController {
         if let query = searchController.searchBar.text, !query.isEmpty {
             viewModel.searchBooks(query: query)
         }
+    }
+    
+    @objc private func refreshData() {
+            if let query = searchController.searchBar.text, !query.isEmpty {
+                viewModel.searchBooks(query: query)
+            } else {
+                refreshControl.endRefreshing()
+            }
     }
 }
 
@@ -106,9 +121,9 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
         case .idle:
             return 0
         case .loading:
-            return 2 // Segment Control + Result Label
+            return 2 // Loading Cell + Segment Control
         case .loaded(let books):
-            return books.count + 2 // Segment Control + Result Label + Books
+            return books.count + 3 // Segment Control + Result Label + Books + Loading Cell
         case .error:
             return 3 // Segment Control + Result Label + Error
         case .noResults:
@@ -132,7 +147,7 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 return cell
             } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResultLabelTableViewCell", for: indexPath) as? ResultLabelTableViewCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? LoadingCell else {
                     return UITableViewCell()
                 }
                 return cell
@@ -151,12 +166,17 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
                     return UITableViewCell()
                 }
                 return cell
-            } else {
-                let book = books[indexPath.row - 2]
+            } else if indexPath.row - 2 < books.count  {//SegmentedControlCell,ResultLabelTableViewCell의 indexPath.row - 2
+                let book = books[indexPath.row - 2] //SegmentedControlCell,ResultLabelTableViewCell의 indexPath.row - 2
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookTableViewCell", for: indexPath) as? BookTableViewCell else {
                     return UITableViewCell()
                 }
                 cell.configure(with: book)
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? LoadingCell else {
+                    return UITableViewCell()
+                }
                 return cell
             }
         case .error:
@@ -210,9 +230,15 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            viewModel.loadNextPage()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if case let .loaded(books) = viewModel.state, indexPath.row > 1 {
-            let book = books[indexPath.row - 2]
+            let book = books[indexPath.row - 2] //SegmentedControlCell,ResultLabelTableViewCell의 indexPath.row - 2
             let detailVC = BookDetailViewController()
             detailVC.viewModel = BookDetailViewModel(book: book)
             navigationController?.pushViewController(detailVC, animated: true)
@@ -226,4 +252,5 @@ extension BookSearchViewController: UISearchBarDelegate {
         viewModel.searchBooks(query: query)
     }
 }
+
 

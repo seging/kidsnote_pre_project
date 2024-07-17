@@ -20,6 +20,7 @@ class GoogleBooksAPIService {
             query,
             "startIndex=\(startIndex)",
             "maxResults=20",
+            "filter=ebooks",
             "key=\(Config.apiKey)"
         ].joined(separator: "&")
         let encodedQuery = queryItems.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
