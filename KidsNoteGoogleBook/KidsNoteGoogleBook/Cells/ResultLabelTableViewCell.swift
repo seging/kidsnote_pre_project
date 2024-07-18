@@ -29,7 +29,7 @@ class ResultLabelTableViewCell: UITableViewCell {
         contentView.addSubview(resultLabel)
         resultLabel.translatesAutoresizingMaskIntoConstraints = false
         self.selectionStyle = .none
-        self.backgroundColor = .systemBackground
+        self.backgroundColor = .background
         NSLayoutConstraint.activate([
             resultLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             resultLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),

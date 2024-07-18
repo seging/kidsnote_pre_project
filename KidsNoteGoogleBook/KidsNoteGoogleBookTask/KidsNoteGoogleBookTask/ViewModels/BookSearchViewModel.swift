@@ -26,11 +26,13 @@ public class BookSearchViewModel: ObservableObject {
     private var query: String = ""
     private var hasMorePages: Bool = true
     private let booksPerPage: Int = 10
+    
     private var cache: [BookItem] = [] // 캐시를 단순화하여 배열로 저장
     
     public init() {}
     
     public func searchBooks(query: String) {
+        print(query)
         self.query = query
         self.currentPage = 0
         self.allBooks = []
@@ -61,12 +63,12 @@ public class BookSearchViewModel: ObservableObject {
                 
                 // API 요청으로 추가 가져오기
                 while totalFilteredBooks.count < booksPerPage && hasMorePages {
-                    let books = try await GoogleBooksAPIService.shared.searchBooks(query: query, startIndex: currentPage * booksPerPage)
+                    let books = try await searchMultipleQueries(query: query, startIndex: currentPage * booksPerPage)
                     if let items = books.items, !items.isEmpty {
                         let filteredBooks = items.filter { self.isBookValid(book: $0) }
                         for book in filteredBooks {
                             if !seenBooks.contains(book) {
-                                if totalFilteredBooks.count <= booksPerPage {
+                                if totalFilteredBooks.count < booksPerPage {
                                     totalFilteredBooks.append(book)
                                     seenBooks.insert(book)
                                 } else {
@@ -147,6 +149,38 @@ public class BookSearchViewModel: ObservableObject {
     private func showNoDataMsg() {
         state = .noResults("\(selectedIdx == 0 ? "eBook" : "오디오북") 검색결과 없음")
     }
+    
+    private func searchMultipleQueries(query: String, startIndex: Int) async throws -> BookResponse {
+        let queries = [
+            "inauthor:\(query)",
+            "inpublisher:\(query)",
+            "intitle:\(query)",
+            "subject:\(query)",
+            query
+        ]
+        
+        var allItems: [BookItem] = []
+        
+        for queryItem in queries {
+            let books = try await GoogleBooksAPIService.shared.searchBooks(query: queryItem, startIndex: startIndex)
+            if let items = books.items {
+                allItems.append(contentsOf: items)
+            }
+            if allItems.count >= 100 {
+                break
+            }
+        }
+        
+        return BookResponse(kind: "books#volumes", totalItems: allItems.count, items: allItems)
+    }
+    
+    public func resetStateIfNeeded() {
+        
+        state = .idle
+        allBooks.removeAll()
+        cache.removeAll()
+        
+    }
 }
 
 extension BookItem: Hashable {
@@ -158,8 +192,6 @@ extension BookItem: Hashable {
         return lhs.id == rhs.id
     }
 }
-
-
 
 
 

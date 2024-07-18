@@ -10,21 +10,21 @@ import Foundation
 
 class GoogleBooksAPIService {
     private let networkService: NetworkServiceProtocol = NetworkService.shared
-    
     static let shared = GoogleBooksAPIService()
-        
+    
     private init() {}
     
     func searchBooks(query: String, startIndex:Int) async throws -> BookResponse {
-        let queryItems:String = [
-            query,
+        let queryItems = [
+            "q=\(query)",
             "startIndex=\(startIndex)",
-            "maxResults=20",
+            "maxResults=10",
             "filter=ebooks",
+            "langRestrict=ko",
             "key=\(Config.apiKey)"
         ].joined(separator: "&")
         let encodedQuery = queryItems.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let urlString = "https://www.googleapis.com/books/v1/volumes?q=\(encodedQuery)"
+        let urlString = "https://www.googleapis.com/books/v1/volumes?\(encodedQuery)"
         
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
@@ -33,5 +33,4 @@ class GoogleBooksAPIService {
         let response: BookResponse = try await networkService.request(url: url)
         return response
     }
-    
 }

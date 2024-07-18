@@ -25,6 +25,7 @@ class LoadingCell: UITableViewCell {
 
     private func setupUI() {
         contentView.addSubview(activityIndicator)
+        self.backgroundColor = .clear
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)

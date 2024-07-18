@@ -73,7 +73,7 @@ class BookTableViewCell: UITableViewCell {
         contentView.addSubview(authorLabel)
         contentView.addSubview(ratingLabel)
         contentView.addSubview(eBookLabel)
-        
+        self.backgroundColor = .background
         bookImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.translatesAutoresizingMaskIntoConstraints = false

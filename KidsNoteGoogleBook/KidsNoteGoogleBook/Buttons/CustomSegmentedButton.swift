@@ -27,7 +27,7 @@ class CustomSegmentedButton: UIButton {
         highlightLayer.isHidden = true
         self.layer.addSublayer(highlightLayer)
         self.clipsToBounds = true
-        self.backgroundColor = .clear
+        self.backgroundColor = .background
     }
     
     private func animateHighlightLayer() {

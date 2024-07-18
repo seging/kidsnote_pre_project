@@ -22,6 +22,8 @@ class SegmentedControlCell: UITableViewCell {
     private func setupUI() {
         contentView.addSubview(customSegmentedControl)
         customSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = .background
+        
         self.selectionStyle = .none
         NSLayoutConstraint.activate([
             customSegmentedControl.topAnchor.constraint(equalTo: contentView.topAnchor),

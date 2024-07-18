@@ -46,7 +46,7 @@ class NetworkErrorTableViewCell: UITableViewCell {
     
     private func setupUI() {
         self.selectionStyle = .none
-        
+        self.backgroundColor = .clear
         contentView.addSubview(errorLabel)
         contentView.addSubview(errorMsgLabel)
         contentView.addSubview(retryButton)

@@ -14,8 +14,8 @@ class BookSearchViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private let tableView = UITableView()
-    private let searchController = UISearchController(searchResultsController: nil)
     private let refreshControl = CustomRefreshControl()
+    private let customSearchView = CustomSearchView(frame: CGRect(x: 0, y: 30, width: UIScreen.main.bounds.width - 40, height: 100))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +35,11 @@ class BookSearchViewController: UIViewController {
     
     private func setupUI() {
         view.addSubview(tableView)
+        view.backgroundColor = .navigation
+        navigationController?.navigationBar.backgroundColor = .navigation
         
-        view.backgroundColor = .systemBackground
-        tableView.backgroundColor = .systemBackground
+        
+        tableView.backgroundColor = .background
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -58,14 +60,16 @@ class BookSearchViewController: UIViewController {
     }
     
     private func setupSearchController() {
-        searchController.searchBar.delegate = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Play 북에서 검색"
-        searchController.searchBar.backgroundColor = .clear
-        searchController.searchBar.tintColor = .label
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
+        customSearchView.delegate = self
+        self.navigationItem.titleView = customSearchView
+    }
+    
+    @objc private func refreshData() {
+        if let query = customSearchView.searchBar.text, !query.isEmpty {
+            viewModel.searchBooks(query: query)
+        } else {
+            refreshControl.endRefreshing()
+        }
     }
     
     private func bindViewModel() {
@@ -81,7 +85,7 @@ class BookSearchViewController: UIViewController {
     private func updateUI(for state: State) {
         tableView.reloadData()
         if refreshControl.isRefreshing {
-                refreshControl.endRefreshing()
+            refreshControl.endRefreshing()
         }
     }
     
@@ -90,17 +94,9 @@ class BookSearchViewController: UIViewController {
     }
     
     @objc private func retryButtonTapped() {
-        if let query = searchController.searchBar.text, !query.isEmpty {
+        if let query = customSearchView.searchBar.text, !query.isEmpty {
             viewModel.searchBooks(query: query)
         }
-    }
-    
-    @objc private func refreshData() {
-            if let query = searchController.searchBar.text, !query.isEmpty {
-                viewModel.searchBooks(query: query)
-            } else {
-                refreshControl.endRefreshing()
-            }
     }
 }
 
@@ -246,11 +242,28 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension BookSearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text, !query.isEmpty else { return }
+extension BookSearchViewController: CustomSearchViewDelegate {
+    func customSearchViewDidSearch(_ searchView: CustomSearchView, query: String) {
         viewModel.searchBooks(query: query)
     }
+    
+    func customSearchView(_ searchView: CustomSearchView, textDidChange searchText: String?) {
+        guard let query = searchText, !query.isEmpty else {
+            viewModel.resetStateIfNeeded()
+            return
+        }
+    }
+    
+    func customSearchViewDidBeginEditing(_ searchView: CustomSearchView) {
+        // 필요시 구현
+    }
+    
+    func customSearchViewDidEndEditing(_ searchView: CustomSearchView) {
+        // 필요시 구현
+    }
+    
+    func customSearchViewDidClear(_ searchView: CustomSearchView) {
+        viewModel.resetStateIfNeeded()
+    }
 }
-
 

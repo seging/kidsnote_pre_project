@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73D0A9172C494BFF00D0387E /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0A9162C494BFF00D0387E /* CustomSearchView.swift */; };
 		73FC323A2C47658200CC9B86 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC32392C47658200CC9B86 /* LoadingCell.swift */; };
 		73FC323D2C476DCE00CC9B86 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC323C2C476DCE00CC9B86 /* CustomRefreshControl.swift */; };
 		73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5982C44E3D900841711 /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		73D0A9162C494BFF00D0387E /* CustomSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchView.swift; sourceTree = "<group>"; };
 		73FC32392C47658200CC9B86 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		73FC323C2C476DCE00CC9B86 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
 		73FCC5952C44E3D900841711 /* KidsNoteGoogleBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsNoteGoogleBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73D0A9152C494BF400D0387E /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				73D0A9162C494BFF00D0387E /* CustomSearchView.swift */,
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
 		73FC323B2C476DC200CC9B86 /* RefreshControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +154,7 @@
 		73FCC5972C44E3D900841711 /* KidsNoteGoogleBook */ = {
 			isa = PBXGroup;
 			children = (
+				73D0A9152C494BF400D0387E /* SearchView */,
 				73FC323B2C476DC200CC9B86 /* RefreshControl */,
 				73FCC60B2C46459600841711 /* Buttons */,
 				73FCC5FE2C4573DB00841711 /* Cells */,
@@ -353,6 +364,7 @@
 				73FC323A2C47658200CC9B86 /* LoadingCell.swift in Sources */,
 				73FCC6002C4573EE00841711 /* BookTableViewCell.swift in Sources */,
 				73FCC60A2C462D0500841711 /* CustomSegmentedControl.swift in Sources */,
+				73D0A9172C494BFF00D0387E /* CustomSearchView.swift in Sources */,
 				73FCC60D2C4645AA00841711 /* CustomSegmentedButton.swift in Sources */,
 				73FCC5CA2C44E5DE00841711 /* BookSearchViewController.swift in Sources */,
 				73FC323D2C476DCE00CC9B86 /* CustomRefreshControl.swift in Sources */,
