@@ -46,6 +46,14 @@ class BookTableViewCell: UITableViewCell {
         return label
     }()
     
+    let ratingImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(systemName: "star.fill")
+        imageView.tintColor = .systemGray
+        return imageView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -74,6 +82,7 @@ class BookTableViewCell: UITableViewCell {
         titleLabel.text = nil
         authorLabel.text = nil
         ratingLabel.text = nil
+        ratingImageView.isHidden = true
         eBookLabel.text = nil
     }
     
@@ -83,12 +92,14 @@ class BookTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(authorLabel)
         contentView.addSubview(ratingLabel)
+        contentView.addSubview(ratingImageView)
         contentView.addSubview(eBookLabel)
         self.backgroundColor = .background
         bookImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
+        ratingImageView.translatesAutoresizingMaskIntoConstraints = false
         eBookLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -106,13 +117,16 @@ class BookTableViewCell: UITableViewCell {
             authorLabel.leadingAnchor.constraint(equalTo: bookImageView.trailingAnchor, constant: 10),
             authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            ratingLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 4),
-            ratingLabel.leadingAnchor.constraint(equalTo: bookImageView.trailingAnchor, constant: 10),
-            ratingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            
-            eBookLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 2),
+            eBookLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 4),
             eBookLabel.leadingAnchor.constraint(equalTo: bookImageView.trailingAnchor, constant: 10),
-            eBookLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            ratingLabel.topAnchor.constraint(equalTo: eBookLabel.topAnchor),
+            ratingLabel.leadingAnchor.constraint(equalTo: eBookLabel.trailingAnchor, constant: 5),
+            
+            ratingImageView.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 5),
+            ratingImageView.centerYAnchor.constraint(equalTo: eBookLabel.centerYAnchor),
+            ratingImageView.widthAnchor.constraint(equalToConstant: 14),
+            ratingImageView.heightAnchor.constraint(equalToConstant: 14),
             
         ])
     }
@@ -121,7 +135,10 @@ class BookTableViewCell: UITableViewCell {
         titleLabel.text = book.volumeInfo.title
         authorLabel.text = book.volumeInfo.authors?.joined(separator: ", ")
         if let rating = book.volumeInfo.averageRating {
-            ratingLabel.text = "Rating: \(rating)"
+            ratingLabel.text = "\(rating)"
+            ratingImageView.isHidden = rating == .zero
+        } else {
+            ratingImageView.isHidden = true
         }
         eBookLabel.text = "eBook"
         
