@@ -198,7 +198,7 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 return cell
             }
-        case .noResults:
+        case .noResults(let msg):
             if indexPath.row == 0 {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "SegmentedControlCell", for: indexPath) as? SegmentedControlCell else {
                     return UITableViewCell()
@@ -216,6 +216,7 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "NoResultsTableViewCell", for: indexPath) as? NoResultsTableViewCell else {
                     return UITableViewCell()
                 }
+                cell.noResultsLabel.text = msg
                 return cell
             }
         @unknown default:

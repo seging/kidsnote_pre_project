@@ -142,7 +142,7 @@ public class BookSearchViewModel: ObservableObject {
             state = .loaded(allBooks.filter { $0.saleInfo?.isEbook == true })
         } else if index == 1 {
             // audioBook 필터
-            state = .loaded(allBooks.filter { $0.accessInfo?.textToSpeechPermission == "ALLOWED" })
+            state = .loaded(allBooks.filter { $0.accessInfo?.textToSpeechPermission == "ALLOWED" && $0.accessInfo?.viewability == "PARTIAL" })
         }
     }
     
