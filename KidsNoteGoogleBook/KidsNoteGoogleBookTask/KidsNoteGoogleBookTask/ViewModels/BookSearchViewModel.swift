@@ -117,16 +117,8 @@ public class BookSearchViewModel: ObservableObject {
         
         let imageURLs = books.compactMap { $0.volumeInfo.imageLinks?.thumbnail }.compactMap { URL(string: $0) }
         
-        let group = DispatchGroup()
-        
-        for url in imageURLs {
-            group.enter()
-            UIImageView.loadImage(from: url) { _ in
-                group.leave()
-            }
-        }
-        
-        group.notify(queue: .main) {
+        // 이미지 URL을 미리 로드합니다.
+        ImageCacheManager.shared.preloadImages(from: imageURLs) {
             self.filterContent(by: self.selectedIdx)
         }
     }

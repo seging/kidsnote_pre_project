@@ -66,6 +66,17 @@ class BookTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bookImageView.cancelImageLoad() // 이미지 로드 작업 취소
+        bookImageView.image = nil // 셀을 재사용할 때 이미지 초기화
+        
+        titleLabel.text = nil
+        authorLabel.text = nil
+        ratingLabel.text = nil
+        eBookLabel.text = nil
+    }
+    
     private func setupUI() {
         self.selectionStyle = .none
         contentView.addSubview(bookImageView)
@@ -114,11 +125,12 @@ class BookTableViewCell: UITableViewCell {
         }
         eBookLabel.text = "eBook"
         
-        if let imageURL = book.volumeInfo.imageLinks?.thumbnail, let url = URL(string: imageURL) {
-            UIImageView.loadImage(from: url) { image in
-                self.bookImageView.image = image
-            }
+        guard let imageURLString = book.volumeInfo.imageLinks?.thumbnail, let url = URL(string: imageURLString) else {
+            bookImageView.image = nil
+            return
         }
+        
+        bookImageView.loadImage(from: url)
     }
 }
 

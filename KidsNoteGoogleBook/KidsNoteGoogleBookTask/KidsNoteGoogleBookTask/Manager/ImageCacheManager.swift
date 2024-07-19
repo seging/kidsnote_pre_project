@@ -33,5 +33,25 @@ class ImageCacheManager {
             self.cache.removeAllObjects()
         }
     }
+
+    // 이미지를 미리 로드하는 함수
+    func preloadImages(from urls: [URL], completion: @escaping () -> Void) {
+        let group = DispatchGroup()
+        
+        for url in urls {
+            group.enter()
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data, let image = UIImage(data: data) {
+                    self.setImage(image, forKey: url.absoluteString)
+                }
+                group.leave()
+            }.resume()
+        }
+        
+        group.notify(queue: .main) {
+            completion()
+        }
+    }
 }
+
 
