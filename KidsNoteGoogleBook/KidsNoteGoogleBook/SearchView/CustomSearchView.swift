@@ -9,8 +9,8 @@ import UIKit
 
 class CustomSearchView: UIView, UITextFieldDelegate {
     
-    let searchBar = UITextField()
-    let clearButton = UIButton()
+    let searchBar:UITextField = UITextField()
+    let clearButton:UIButton = UIButton()
     var searchBarWidth: CGFloat!
     let clearButtonWidth: CGFloat = 50
     weak var delegate: CustomSearchViewDelegate?
@@ -32,12 +32,12 @@ class CustomSearchView: UIView, UITextFieldDelegate {
         searchBar.borderStyle = .none
         searchBar.returnKeyType = .search
         searchBar.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        searchBar.textColor = .label
+        searchBar.textColor = .naviTint
         searchBar.frame = CGRect(x: 0, y: 0, width: self.frame.width - clearButtonWidth, height: self.frame.height)
         
         if let clearImage = UIImage(systemName: "xmark") {
             clearButton.setImage(clearImage, for: .normal)
-            clearButton.tintColor = .label
+            clearButton.tintColor = .naviTint
         }
         
         clearButton.addTarget(self, action: #selector(clearButtonTapped), for: .touchUpInside)

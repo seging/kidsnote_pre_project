@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73AED4732C4C239E00FF5256 /* WishlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AED4722C4C239E00FF5256 /* WishlistManager.swift */; };
 		73DA38632C468B9600BE8B35 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DA38622C468B9600BE8B35 /* ImageCacheManager.swift */; };
 		73DA38662C46908700BE8B35 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DA38652C46908700BE8B35 /* UIImageView+Cache.swift */; };
 		73FCC5D92C44E8D000841711 /* KidsNoteGoogleBookTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 73FCC5D82C44E8D000841711 /* KidsNoteGoogleBookTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -14,12 +15,12 @@
 		73FCC5EB2C45080800841711 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5EA2C45080800841711 /* Book.swift */; };
 		73FCC5ED2C450B7400841711 /* GoogleBooksAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5EC2C450B7400841711 /* GoogleBooksAPIService.swift */; };
 		73FCC5F02C450D6A00841711 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5EF2C450D6A00841711 /* Config.swift */; };
-		73FCC5F22C45113A00841711 /* BookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5F12C45113A00841711 /* BookManager.swift */; };
 		73FCC5F92C45136B00841711 /* BookSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5F82C45136B00841711 /* BookSearchViewModel.swift */; };
 		73FCC5FB2C45177300841711 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5FA2C45177300841711 /* BookDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73AED4722C4C239E00FF5256 /* WishlistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistManager.swift; sourceTree = "<group>"; };
 		73DA38622C468B9600BE8B35 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		73DA38652C46908700BE8B35 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		73FCC5D52C44E8D000841711 /* KidsNoteGoogleBookTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KidsNoteGoogleBookTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,7 +31,6 @@
 		73FCC5EA2C45080800841711 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		73FCC5EC2C450B7400841711 /* GoogleBooksAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBooksAPIService.swift; sourceTree = "<group>"; };
 		73FCC5EF2C450D6A00841711 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		73FCC5F12C45113A00841711 /* BookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookManager.swift; sourceTree = "<group>"; };
 		73FCC5F82C45136B00841711 /* BookSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewModel.swift; sourceTree = "<group>"; };
 		73FCC5FA2C45177300841711 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +50,7 @@
 			isa = PBXGroup;
 			children = (
 				73DA38622C468B9600BE8B35 /* ImageCacheManager.swift */,
+				73AED4722C4C239E00FF5256 /* WishlistManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -90,7 +91,6 @@
 				73FCC5E92C4507FD00841711 /* Models */,
 				73FCC5E82C4507F300841711 /* Network */,
 				73FCC5EF2C450D6A00841711 /* Config.swift */,
-				73FCC5F12C45113A00841711 /* BookManager.swift */,
 			);
 			path = KidsNoteGoogleBookTask;
 			sourceTree = "<group>";
@@ -203,12 +203,12 @@
 			files = (
 				73FCC5FB2C45177300841711 /* BookDetailViewModel.swift in Sources */,
 				73FCC5ED2C450B7400841711 /* GoogleBooksAPIService.swift in Sources */,
+				73AED4732C4C239E00FF5256 /* WishlistManager.swift in Sources */,
 				73FCC5F92C45136B00841711 /* BookSearchViewModel.swift in Sources */,
 				73FCC5F02C450D6A00841711 /* Config.swift in Sources */,
 				73DA38632C468B9600BE8B35 /* ImageCacheManager.swift in Sources */,
 				73DA38662C46908700BE8B35 /* UIImageView+Cache.swift in Sources */,
 				73FCC5EB2C45080800841711 /* Book.swift in Sources */,
-				73FCC5F22C45113A00841711 /* BookManager.swift in Sources */,
 				73FCC5E72C44F8CD00841711 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

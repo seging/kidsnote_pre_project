@@ -14,7 +14,7 @@ class BookSearchViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private let tableView = UITableView()
-    private let refreshControl = CustomRefreshControl()
+    private let refreshControl = UIRefreshControl()
     private let customSearchView = CustomSearchView(frame: CGRect(x: 0, y: 30, width: UIScreen.main.bounds.width - 40, height: 100))
     
     override func viewDidLoad() {
@@ -30,14 +30,24 @@ class BookSearchViewController: UIViewController {
         tableView.register(NoResultsTableViewCell.self, forCellReuseIdentifier: "NoResultsTableViewCell")
         tableView.register(NetworkErrorTableViewCell.self, forCellReuseIdentifier: "NetworkErrorTableViewCell")
         tableView.register(LoadingCell.self, forCellReuseIdentifier: "LoadingCell")
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.backgroundColor = .navigation
+        setNavigationBarUnderlineHidden(false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.backgroundColor = .navigation
+        setNavigationBarUnderlineHidden(true)
     }
     
     private func setupUI() {
         view.addSubview(tableView)
         view.backgroundColor = .navigation
         navigationController?.navigationBar.backgroundColor = .navigation
-        
         
         tableView.backgroundColor = .background
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +71,28 @@ class BookSearchViewController: UIViewController {
     
     private func setupSearchController() {
         customSearchView.delegate = self
+        addNavigationBarUnderline()
         self.navigationItem.titleView = customSearchView
+    }
+    
+    private func addNavigationBarUnderline() {
+        let underline = UIView()
+        underline.backgroundColor = .naviLine
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        underline.tag = 1001
+        
+        navigationController?.navigationBar.addSubview(underline)
+        
+        NSLayoutConstraint.activate([
+            underline.heightAnchor.constraint(equalToConstant: 1),
+            underline.leadingAnchor.constraint(equalTo: navigationController!.navigationBar.leadingAnchor),
+            underline.trailingAnchor.constraint(equalTo: navigationController!.navigationBar.trailingAnchor),
+            underline.bottomAnchor.constraint(equalTo: navigationController!.navigationBar.bottomAnchor)
+        ])
+    }
+    
+    private func setNavigationBarUnderlineHidden(_ hidden: Bool) {
+        navigationController?.navigationBar.viewWithTag(1001)?.isHidden = hidden
     }
     
     @objc private func refreshData() {
@@ -162,8 +193,8 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
                     return UITableViewCell()
                 }
                 return cell
-            } else if indexPath.row - 2 < books.count  {//SegmentedControlCell,ResultLabelTableViewCell의 indexPath.row - 2
-                let book = books[indexPath.row - 2] //SegmentedControlCell,ResultLabelTableViewCell의 indexPath.row - 2
+            } else if indexPath.row - 2 < books.count {
+                let book = books[indexPath.row - 2]
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookTableViewCell", for: indexPath) as? BookTableViewCell else {
                     return UITableViewCell()
                 }
@@ -235,7 +266,7 @@ extension BookSearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if case let .loaded(books) = viewModel.state, indexPath.row > 1 {
-            let book = books[indexPath.row - 2] //SegmentedControlCell,ResultLabelTableViewCell의 indexPath.row - 2
+            let book = books[indexPath.row - 2]
             let detailVC = BookDetailViewController()
             detailVC.viewModel = BookDetailViewModel(book: book)
             navigationController?.pushViewController(detailVC, animated: true)
@@ -267,4 +298,5 @@ extension BookSearchViewController: CustomSearchViewDelegate {
         viewModel.resetStateIfNeeded()
     }
 }
+
 

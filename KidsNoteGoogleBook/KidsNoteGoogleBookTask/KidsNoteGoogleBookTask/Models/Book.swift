@@ -38,6 +38,7 @@ public struct VolumeInfo: Codable {
     public let imageLinks: ImageLinks?
     public let language: String
     public let readingModes: ReadingModes?
+    public let previewLink: String?
 }
 
 public struct ReadingModes: Codable {
