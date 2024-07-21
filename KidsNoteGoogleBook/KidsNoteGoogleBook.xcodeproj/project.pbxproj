@@ -16,7 +16,6 @@
 		73D0A9292C4A766400D0387E /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0A9282C4A766400D0387E /* RatingCell.swift */; };
 		73D0A92B2C4A768400D0387E /* PublishDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0A92A2C4A768400D0387E /* PublishDateCell.swift */; };
 		73FC323A2C47658200CC9B86 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC32392C47658200CC9B86 /* LoadingCell.swift */; };
-		73FC323D2C476DCE00CC9B86 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC323C2C476DCE00CC9B86 /* CustomRefreshControl.swift */; };
 		73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC5982C44E3D900841711 /* AppDelegate.swift */; };
 		73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCC59A2C44E3D900841711 /* SceneDelegate.swift */; };
 		73FCC5A22C44E3DC00841711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73FCC5A12C44E3DC00841711 /* Assets.xcassets */; };
@@ -78,7 +77,6 @@
 		73D0A9282C4A766400D0387E /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		73D0A92A2C4A768400D0387E /* PublishDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDateCell.swift; sourceTree = "<group>"; };
 		73FC32392C47658200CC9B86 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
-		73FC323C2C476DCE00CC9B86 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
 		73FCC5952C44E3D900841711 /* KidsNoteGoogleBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsNoteGoogleBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FCC5982C44E3D900841711 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73FCC59A2C44E3D900841711 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,14 +175,6 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		73FC323B2C476DC200CC9B86 /* RefreshControl */ = {
-			isa = PBXGroup;
-			children = (
-				73FC323C2C476DCE00CC9B86 /* CustomRefreshControl.swift */,
-			);
-			path = RefreshControl;
-			sourceTree = "<group>";
-		};
 		73FCC58C2C44E3D900841711 = {
 			isa = PBXGroup;
 			children = (
@@ -210,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				73D0A9152C494BF400D0387E /* SearchView */,
-				73FC323B2C476DC200CC9B86 /* RefreshControl */,
 				73FCC60B2C46459600841711 /* Buttons */,
 				73FCC5FE2C4573DB00841711 /* Cells */,
 				73FCC5F32C45118500841711 /* Views */,
@@ -426,7 +415,6 @@
 				73D0A9272C4A764000D0387E /* DescriptionCell.swift in Sources */,
 				73D0A9232C4A75F300D0387E /* ButtonsCell.swift in Sources */,
 				73FCC5CA2C44E5DE00841711 /* BookSearchViewController.swift in Sources */,
-				73FC323D2C476DCE00CC9B86 /* CustomRefreshControl.swift in Sources */,
 				73FCC6082C462BAA00841711 /* SegmentedControlTableViewCell.swift in Sources */,
 				73D0A9212C4A75D800D0387E /* BookInfoCell.swift in Sources */,
 			);

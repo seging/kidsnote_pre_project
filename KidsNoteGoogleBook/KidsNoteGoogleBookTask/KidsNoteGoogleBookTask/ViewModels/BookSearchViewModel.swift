@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import UIKit
 
+// 상태를 나타내는 열거형
 public enum State: Equatable {
     case idle
     case loading
@@ -17,7 +18,9 @@ public enum State: Equatable {
     case noResults(String)
 }
 
+// BookSearchViewModel은 검색 작업을 관리하고 상태를 업데이트하는 역할을 합니다.
 public final class BookSearchViewModel: ObservableObject {
+    // UI에 바인딩되는 Published 프로퍼티
     @Published public var state: State = .idle
     private var allBooks: ContiguousArray<BookItem> = []
     private var selectedIdx: Int = 0
@@ -31,10 +34,12 @@ public final class BookSearchViewModel: ObservableObject {
     
     public init() {}
     
+    // 새로운 검색 작업을 시작하는 함수
     public func searchBooks(query: String) {
         // 중복 검색 방지
         guard self.query != query || state != .loading else { return }
         
+        // 검색어와 관련된 상태 초기화
         self.query = query
         self.currentPage = 0
         self.allBooks = []
@@ -42,10 +47,12 @@ public final class BookSearchViewModel: ObservableObject {
         self.hasMorePages = true
         self.state = .loading
         ImageCacheManager.shared.clearCache()
-        loadNextPage()
+        loadNextPage() // 첫 번째 페이지 로드
     }
     
+    // 다음 페이지를 로드하는 함수
     public func loadNextPage() {
+        // 이미 페이지를 로딩 중이거나 더 이상 로드할 페이지가 없는 경우 리턴
         guard !isLoadingPage, hasMorePages else { return }
         isLoadingPage = true
         
@@ -65,6 +72,7 @@ public final class BookSearchViewModel: ObservableObject {
                 
                 // API 요청으로 추가 가져오기
                 while totalFilteredBooks.count < booksPerPage && hasMorePages {
+                    // 여러 쿼리를 통해 책을 검색합니다.
                     let books = try await searchMultipleQueries(query: query, startIndex: currentPage * booksPerPage)
                     if let items = books.items {
                         let filteredBooks = ContiguousArray(items.filter { self.isBookValid(book: $0) })
@@ -80,14 +88,16 @@ public final class BookSearchViewModel: ObservableObject {
                         }
                         self.currentPage += 1
                     } else {
-                        hasMorePages = false
+                        hasMorePages = false // 더 이상 로드할 페이지가 없는 경우
                     }
                 }
                 
+                // 로드한 책들을 전체 목록에 추가
                 self.allBooks.append(contentsOf: totalFilteredBooks)
                 self.preloadImages(for: totalFilteredBooks)
                 self.isLoadingPage = false
                 
+                // 검색 결과가 없는 경우
                 if totalFilteredBooks.isEmpty && cache.isEmpty {
                     self.showNoDataMsg()
                 } else {
@@ -100,6 +110,7 @@ public final class BookSearchViewModel: ObservableObject {
         }
     }
     
+    // 책의 유효성을 검증하는 함수
     private func isBookValid(book: BookItem) -> Bool {
         let volumeInfo = book.volumeInfo
         guard let readingModes = volumeInfo.readingModes else { return false }
@@ -110,18 +121,21 @@ public final class BookSearchViewModel: ObservableObject {
         return isValidBook && hasImageLinks && isEbookVisible
     }
     
+    // 이미지를 미리 로드하는 함수
     private func preloadImages(for books: ContiguousArray<BookItem>?) {
         guard let books = books, !books.isEmpty else {
             self.showNoDataMsg()
             return
         }
         
+        // 책의 이미지 URL을 수집하여 캐시에 미리 로드
         let imageURLs = books.compactMap { $0.volumeInfo.imageLinks?.thumbnail }.compactMap { URL(string: $0) }
         ImageCacheManager.shared.preloadImages(from: imageURLs) {
             self.filterContent(by: self.selectedIdx)
         }
     }
     
+    // 컨텐츠를 필터링하는 함수
     public func filterContent(by index: Int) {
         selectedIdx = index
         guard !allBooks.isEmpty else {
@@ -137,10 +151,12 @@ public final class BookSearchViewModel: ObservableObject {
         }
     }
     
+    // 데이터가 없는 경우 메시지를 표시하는 함수
     private func showNoDataMsg() {
         state = .noResults("\(selectedIdx == 0 ? "eBook" : "오디오북") 검색결과 없음")
     }
     
+    // 여러 쿼리를 통해 검색을 수행하는 함수
     private func searchMultipleQueries(query: String, startIndex: Int) async throws -> BookResponse {
         let queries = [
             "inauthor:\(query)",
@@ -165,6 +181,7 @@ public final class BookSearchViewModel: ObservableObject {
         return BookResponse(kind: "books#volumes", totalItems: allItems.count, items: Array(allItems))
     }
     
+    // 상태를 초기화하는 함수
     public func resetStateIfNeeded() {
         state = .idle
         allBooks.removeAll()
@@ -172,14 +189,5 @@ public final class BookSearchViewModel: ObservableObject {
     }
 }
 
-extension BookItem: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    public static func == (lhs: BookItem, rhs: BookItem) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
 
 

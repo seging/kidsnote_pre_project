@@ -14,6 +14,7 @@ final class ImageCacheManager {
     
     private init() {}
     
+    // 캐시에서 이미지를 가져오는 함수
     func image(forKey key: String) -> UIImage? {
         var result: UIImage?
         queue.sync {
@@ -22,12 +23,14 @@ final class ImageCacheManager {
         return result
     }
     
+    // 캐시에 이미지를 저장하는 함수
     func setImage(_ image: UIImage, forKey key: String) {
         queue.async(flags: .barrier) {
             self.cache.setObject(image, forKey: NSString(string: key))
         }
     }
     
+    // 캐시를 비우는 함수
     func clearCache() {
         queue.async(flags: .barrier) {
             self.cache.removeAllObjects()

@@ -11,18 +11,20 @@ private var imageLoadTaskKey: UInt8 = 0
 private var imageURLKey: UInt8 = 1
 
 extension UIImageView {
+    // 이미지 로드 작업을 저장하기 위한 연관 키
     private var imageLoadTask: URLSessionDataTask? {
         get { objc_getAssociatedObject(self, &imageLoadTaskKey) as? URLSessionDataTask }
         set { objc_setAssociatedObject(self, &imageLoadTaskKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
-    
+    // 이미지 URL을 저장하기 위한 연관 키
     private var imageURL: URL? {
         get { objc_getAssociatedObject(self, &imageURLKey) as? URL }
         set { objc_setAssociatedObject(self, &imageURLKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
     
+    // URL을 통해 이미지를 로드하고, 캐시를 사용하여 성능을 향상시킵니다.
     public func loadImage(from url: URL) {
-        // 기존 로드 작업 취소
+        // 기존 로드 작업 취소합니다.
         imageLoadTask?.cancel()
         
         let key = url.absoluteString
@@ -54,6 +56,7 @@ extension UIImageView {
         imageLoadTask?.resume()
     }
     
+    // 이미지 로드 작업을 취소하는 함수
     public func cancelImageLoad() {
         imageLoadTask?.cancel()
         imageLoadTask = nil

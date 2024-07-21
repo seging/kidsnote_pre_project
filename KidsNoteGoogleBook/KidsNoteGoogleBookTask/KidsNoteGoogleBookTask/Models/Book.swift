@@ -91,3 +91,12 @@ public struct PdfInfo: Codable {
     public let acsTokenLink: String?
 }
 
+extension BookItem: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    public static func == (lhs: BookItem, rhs: BookItem) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
