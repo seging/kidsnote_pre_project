@@ -16,7 +16,6 @@ class CustomSegmentedControl: UIView {
     var textColor: UIColor = .secondaryLabel
     var selectorColor: UIColor = .selectedTab
     var selectorTextColor: UIColor = .selectedTab
-    var underlineColor: UIColor = .selectedTab // 언더라인 색상
     
     var segmentValueChangedHandler: ((Int) -> Void)?
     var textSizes: [CGFloat] = []
@@ -54,21 +53,26 @@ class CustomSegmentedControl: UIView {
         buttons[0].setTitleColor(selectorTextColor, for: .normal)
     }
     
+    private func configureUnderline() {
+        underline = UIView()
+        underline.backgroundColor = .naviLine
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(underline)
+        
+        NSLayoutConstraint.activate([
+            underline.heightAnchor.constraint(equalToConstant: 1),
+            underline.leadingAnchor.constraint(equalTo: leadingAnchor),
+            underline.trailingAnchor.constraint(equalTo: trailingAnchor),
+            underline.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+    
     private func configureSelector() {
         let selectorWidth = textSizes[0]
-        selector = UIView(frame: CGRect(x: 0, y: self.frame.height - 3, width: selectorWidth, height: 3))
+        selector = UIView(frame: CGRect(x: 0, y: self.frame.height - 4, width: selectorWidth, height: 3))
         selector.backgroundColor = selectorColor
         addSubview(selector)
         applyTopCornerRadius()
-    }
-    
-    private func configureUnderline() {
-        let buttonWidth = frame.width / CGFloat(buttonTitles.count)
-        let underlineWidth = textSizes[0]
-        let underlineX = (buttonWidth - underlineWidth) / 2
-        underline = UIView(frame: CGRect(x: underlineX, y: self.frame.height - 1, width: underlineWidth, height: 2))
-        underline.backgroundColor = underlineColor
-        addSubview(underline)
     }
     
     private func layoutButtons() {
@@ -84,15 +88,10 @@ class CustomSegmentedControl: UIView {
         let buttonWidth = frame.width / CGFloat(buttonTitles.count)
         let selectorX = buttonWidth * CGFloat(selectedSegmentIndex) + (buttonWidth - selectorWidth) / 2
         
-        let underlineWidth = textSizes[selectedSegmentIndex]
-        let underlineX = buttonWidth * CGFloat(selectedSegmentIndex) + (buttonWidth - underlineWidth) / 2
         
-        UIView.animate(withDuration: 0.3) {
-            self.selector.frame = CGRect(x: selectorX, y: self.frame.height - 3, width: selectorWidth, height: self.selector.frame.height)
-            self.underline.frame = CGRect(x: underlineX, y: self.frame.height - 1, width: underlineWidth, height: self.underline.frame.height)
-        }
-        
+        self.selector.frame = CGRect(x: selectorX, y: self.frame.height - 4, width: selectorWidth, height:self.selector.frame.height)
         self.applyTopCornerRadius()
+        
     }
     
     @objc private func buttonTapped(button: UIButton) {
@@ -131,4 +130,3 @@ class CustomSegmentedControl: UIView {
         selector.layer.mask = mask
     }
 }
-
