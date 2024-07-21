@@ -7,31 +7,10 @@
 
 import UIKit
 
-class NetworkErrorTableViewCell: UITableViewCell {
-    let errorLabel: UILabel = {
-        let label = UILabel()
-        label.text = "네트워크 오류"
-        label.font = UIFont.boldSystemFont(ofSize: 25)
-        label.textAlignment = .center
-        label.textColor = .label
-        return label
-    }()
-    
-    let errorMsgLabel: UILabel = {
-        let label = UILabel()
-        label.text = "인터넷 연결을 확인한 다음 다시 시도해 주세요."
-        label.textAlignment = .center
-        label.textColor = .secondaryLabel
-        return label
-    }()
-    
-    let retryButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.layer.cornerRadius = 4
-        button.setTitle("다시 시도", for: .normal)
-        button.backgroundColor = .systemTeal
-        return button
-    }()
+class NetworkErrorTableViewCell: BaseTableViewCell {
+    private var errorLabel: UILabel!
+    private var errorMsgLabel: UILabel!
+    private var retryButton: UIButton!
     
     private var retryAction: (() -> Void)?
     
@@ -45,15 +24,13 @@ class NetworkErrorTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.selectionStyle = .none
-        self.backgroundColor = .clear
+        errorLabel = createLabel(text: "네트워크 오류", font: UIFont.boldSystemFont(ofSize: 25), textColor: .label, textAlignment: .center)
+        errorMsgLabel = createLabel(text: "인터넷 연결을 확인한 다음 다시 시도해 주세요.", textColor: .secondaryLabel, textAlignment: .center)
+        retryButton = createButton(title: "다시 시도", titleColor: .background, backgroundColor: .systemTeal, cornerRadius: 4)
+        
         contentView.addSubview(errorLabel)
         contentView.addSubview(errorMsgLabel)
         contentView.addSubview(retryButton)
-        
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        errorMsgLabel.translatesAutoresizingMaskIntoConstraints = false
-        retryButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             errorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
@@ -69,6 +46,7 @@ class NetworkErrorTableViewCell: UITableViewCell {
             retryButton.heightAnchor.constraint(equalToConstant: 35),
             retryButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
+        
         retryButton.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
     }
     
@@ -80,3 +58,4 @@ class NetworkErrorTableViewCell: UITableViewCell {
         self.retryAction = retryAction
     }
 }
+

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-public class BookDetailViewModel: ObservableObject {
+public final class BookDetailViewModel: ObservableObject {
     @Published public var rating: Double
     @Published public var ratingCount: Int
     @Published public var averageRating: Double?

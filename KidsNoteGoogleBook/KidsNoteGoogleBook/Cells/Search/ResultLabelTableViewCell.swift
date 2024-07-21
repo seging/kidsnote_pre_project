@@ -7,14 +7,8 @@
 
 import UIKit
 
-class ResultLabelTableViewCell: UITableViewCell {
-    let resultLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Google Play 검색결과"
-        label.font = UIFont.italicSystemFont(ofSize: 20)
-        label.textAlignment = .left
-        return label
-    }()
+class ResultLabelTableViewCell: BaseTableViewCell {
+    private var resultLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,10 +20,10 @@ class ResultLabelTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
+        resultLabel = createLabel(text: "Google Play 검색결과", font: .italicSystemFont(ofSize: 20), textAlignment: .left)
+        
         contentView.addSubview(resultLabel)
-        resultLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.selectionStyle = .none
-        self.backgroundColor = .background
+        
         NSLayoutConstraint.activate([
             resultLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             resultLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -38,3 +32,4 @@ class ResultLabelTableViewCell: UITableViewCell {
         ])
     }
 }
+

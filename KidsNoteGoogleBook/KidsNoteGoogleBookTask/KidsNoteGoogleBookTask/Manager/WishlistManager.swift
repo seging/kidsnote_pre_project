@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WishlistManager {
+final class WishlistManager {
     private let wishlistKey = "wishlist"
     
     static let shared = WishlistManager()

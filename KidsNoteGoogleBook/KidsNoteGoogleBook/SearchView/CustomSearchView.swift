@@ -29,6 +29,10 @@ class CustomSearchView: UIView, UITextFieldDelegate {
         self.backgroundColor = .clear
         searchBar.delegate = self
         searchBar.placeholder = "Play 북에서 검색"
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [
+                    .foregroundColor: UIColor.naviTint
+                ]
+                searchBar.attributedPlaceholder = NSAttributedString(string: "Play 북에서 검색", attributes: placeholderAttributes)
         searchBar.borderStyle = .none
         searchBar.returnKeyType = .search
         searchBar.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -89,8 +93,6 @@ class CustomSearchView: UIView, UITextFieldDelegate {
 
 protocol CustomSearchViewDelegate: AnyObject {
     func customSearchView(_ searchView: CustomSearchView, textDidChange searchText: String?)
-    func customSearchViewDidBeginEditing(_ searchView: CustomSearchView)
-    func customSearchViewDidEndEditing(_ searchView: CustomSearchView)
     func customSearchViewDidClear(_ searchView: CustomSearchView)
     func customSearchViewDidSearch(_ searchView: CustomSearchView, query: String)
 }

@@ -16,7 +16,7 @@ class NetworkService:NetworkServiceProtocol {
     
     private init() {}
     
-    func request<T:Decodable>(url: URL) async throws -> T {
+    final func request<T:Decodable>(url: URL) async throws -> T {
         do {
             let (data, response) = try await URLSession.shared.data(from: url)
             

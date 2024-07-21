@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import UIKit
 
-public enum State {
+public enum State: Equatable {
     case idle
     case loading
     case loaded([BookItem])
@@ -17,22 +17,24 @@ public enum State {
     case noResults(String)
 }
 
-public class BookSearchViewModel: ObservableObject {
+public final class BookSearchViewModel: ObservableObject {
     @Published public var state: State = .idle
-    private var allBooks: [BookItem] = []
-    private var selectedIdx: Int = 0 // 초기화면에서 eBook 컨텐츠 보여주도록 설정
+    private var allBooks: ContiguousArray<BookItem> = []
+    private var selectedIdx: Int = 0
     private var currentPage: Int = 0
     private var isLoadingPage: Bool = false
     private var query: String = ""
     private var hasMorePages: Bool = true
     private let booksPerPage: Int = 10
     
-    private var cache: [BookItem] = [] // 캐시를 단순화하여 배열로 저장
+    private var cache: ContiguousArray<BookItem> = []
     
     public init() {}
     
     public func searchBooks(query: String) {
-        print(query)
+        // 중복 검색 방지
+        guard self.query != query || state != .loading else { return }
+        
         self.query = query
         self.currentPage = 0
         self.allBooks = []
@@ -49,7 +51,7 @@ public class BookSearchViewModel: ObservableObject {
         
         Task {
             do {
-                var totalFilteredBooks: [BookItem] = []
+                var totalFilteredBooks: ContiguousArray<BookItem> = []
                 var seenBooks = Set<BookItem>()
                 
                 // 캐시에서 필요한 만큼 가져오기
@@ -64,15 +66,15 @@ public class BookSearchViewModel: ObservableObject {
                 // API 요청으로 추가 가져오기
                 while totalFilteredBooks.count < booksPerPage && hasMorePages {
                     let books = try await searchMultipleQueries(query: query, startIndex: currentPage * booksPerPage)
-                    if let items = books.items, !items.isEmpty {
-                        let filteredBooks = items.filter { self.isBookValid(book: $0) }
+                    if let items = books.items {
+                        let filteredBooks = ContiguousArray(items.filter { self.isBookValid(book: $0) })
                         for book in filteredBooks {
                             if !seenBooks.contains(book) {
                                 if totalFilteredBooks.count < booksPerPage {
                                     totalFilteredBooks.append(book)
                                     seenBooks.insert(book)
                                 } else {
-                                    cache.append(book) // 나머지는 캐시에 저장
+                                    cache.append(book)
                                 }
                             }
                         }
@@ -83,23 +85,22 @@ public class BookSearchViewModel: ObservableObject {
                 }
                 
                 self.allBooks.append(contentsOf: totalFilteredBooks)
-                
                 self.preloadImages(for: totalFilteredBooks)
                 self.isLoadingPage = false
                 
                 if totalFilteredBooks.isEmpty && cache.isEmpty {
                     self.showNoDataMsg()
                 } else {
-                    self.state = .loaded(self.allBooks)
+                    self.state = .loaded(Array(self.allBooks))
                 }
             } catch {
-                self.state = .error(error.localizedDescription)
+                self.state = .error("Failed to load books: \(error.localizedDescription)")
                 self.isLoadingPage = false
             }
         }
     }
     
-    func isBookValid(book: BookItem) -> Bool {
+    private func isBookValid(book: BookItem) -> Bool {
         let volumeInfo = book.volumeInfo
         guard let readingModes = volumeInfo.readingModes else { return false }
         guard let accessInfo = book.accessInfo else { return false }
@@ -109,15 +110,13 @@ public class BookSearchViewModel: ObservableObject {
         return isValidBook && hasImageLinks && isEbookVisible
     }
     
-    private func preloadImages(for books: [BookItem]?) {
+    private func preloadImages(for books: ContiguousArray<BookItem>?) {
         guard let books = books, !books.isEmpty else {
             self.showNoDataMsg()
             return
         }
         
         let imageURLs = books.compactMap { $0.volumeInfo.imageLinks?.thumbnail }.compactMap { URL(string: $0) }
-        
-        // 이미지 URL을 미리 로드합니다.
         ImageCacheManager.shared.preloadImages(from: imageURLs) {
             self.filterContent(by: self.selectedIdx)
         }
@@ -151,7 +150,7 @@ public class BookSearchViewModel: ObservableObject {
             query
         ]
         
-        var allItems: [BookItem] = []
+        var allItems: ContiguousArray<BookItem> = []
         
         for queryItem in queries {
             let books = try await GoogleBooksAPIService.shared.searchBooks(query: queryItem, startIndex: startIndex)
@@ -163,15 +162,13 @@ public class BookSearchViewModel: ObservableObject {
             }
         }
         
-        return BookResponse(kind: "books#volumes", totalItems: allItems.count, items: allItems)
+        return BookResponse(kind: "books#volumes", totalItems: allItems.count, items: Array(allItems))
     }
     
     public func resetStateIfNeeded() {
-        
         state = .idle
         allBooks.removeAll()
         cache.removeAll()
-        
     }
 }
 
@@ -184,6 +181,5 @@ extension BookItem: Hashable {
         return lhs.id == rhs.id
     }
 }
-
 
 

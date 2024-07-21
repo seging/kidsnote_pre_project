@@ -10,17 +10,13 @@ import Combine
 import KidsNoteGoogleBookTask
 import SafariServices
 
-class BookDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BookDetailViewController: BaseViewController {
     var viewModel: BookDetailViewModel!
-    private var cancellables = Set<AnyCancellable>()
-    
-    private let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationBar()
-        setupTableView()
+        setupUI()
         bindViewModel()
     }
     
@@ -34,21 +30,39 @@ class BookDetailViewController: UIViewController, UITableViewDataSource, UITable
         setNavigationBarStyle(hiddenUnderline: false, backgroundColor: .navigation, animated: true)
     }
     
+    override func setupTableView() {
+        super.setupTableView()
+        self.registerCells()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.refreshControl.isHidden = true
+    }
+    
+    private func setupUI() {
+        self.view.backgroundColor = .background
+        setupNavigationBar()
+        setupTableView()
+    }
+    
+    private func registerCells() {
+        tableView.register(BookInfoCell.self, forCellReuseIdentifier: "BookInfoCell")
+        tableView.register(ButtonsCell.self, forCellReuseIdentifier: "ButtonsCell")
+        tableView.register(DescriptionCell.self, forCellReuseIdentifier: "DescriptionCell")
+        tableView.register(RatingCell.self, forCellReuseIdentifier: "RatingCell")
+        tableView.register(PublishDateCell.self, forCellReuseIdentifier: "PublishDateCell")
+        
+    }
+    
     private func setupNavigationBar() {
         let backButton = UIButton(type: .system)
         backButton.setTitle("뒤로", for: .normal)
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         backButton.sizeToFit()
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
-        // 이미지와 타이틀 간의 간격 설정
         backButton.semanticContentAttribute = .forceLeftToRight
         
-        let backBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backBarButtonItem
-        
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonTapped))
-        navigationItem.rightBarButtonItem = shareButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonTapped))
     }
     
     @objc private func backButtonTapped() {
@@ -61,46 +75,17 @@ class BookDetailViewController: UIViewController, UITableViewDataSource, UITable
         present(activityVC, animated: true, completion: nil)
     }
     
-    private func setupTableView() {
-        view.addSubview(tableView)
-        self.view.backgroundColor = .background
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        
-        tableView.register(BookInfoCell.self, forCellReuseIdentifier: "BookInfoCell")
-        tableView.register(ButtonsCell.self, forCellReuseIdentifier: "ButtonsCell")
-        tableView.register(DescriptionCell.self, forCellReuseIdentifier: "DescriptionCell")
-        tableView.register(RatingCell.self, forCellReuseIdentifier: "RatingCell")
-        tableView.register(PublishDateCell.self, forCellReuseIdentifier: "PublishDateCell")
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-    
     private func bindViewModel() {
-        viewModel.$rating
+        Publishers.CombineLatest(viewModel.$rating, viewModel.$ratingCount)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] rating in
-                self?.tableView.reloadSections(IndexSet(integer: 3), with: .automatic)
-            }
-            .store(in: &cancellables)
-        
-        viewModel.$ratingCount
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] ratingCount in
+            .sink { [weak self] _ in
                 self?.tableView.reloadSections(IndexSet(integer: 3), with: .automatic)
             }
             .store(in: &cancellables)
         
         viewModel.$isInWishlist
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isInWishlist in
+            .sink { [weak self] _ in
                 self?.updateWishlistButton()
             }
             .store(in: &cancellables)
@@ -108,16 +93,17 @@ class BookDetailViewController: UIViewController, UITableViewDataSource, UITable
     
     private func updateWishlistButton() {
         guard let buttonsCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? ButtonsCell else { return }
-        
         buttonsCell.updateWishlistButton(isInWishlist: viewModel.isInWishlist)
     }
     
     private func openPreview() {
-            guard let previewLink = viewModel.previewLink, let url = URL(string: previewLink) else { return }
-            let safariVC = SFSafariViewController(url: url)
-            present(safariVC, animated: true, completion: nil)
+        guard let previewLink = viewModel.previewLink, let url = URL(string: previewLink) else { return }
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true, completion: nil)
     }
-        
+}
+
+extension BookDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.hasRating ? 5 : 4
     }
@@ -187,15 +173,7 @@ class BookDetailViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.1
     }
-    
-    private func setNavigationBarStyle(hiddenUnderline: Bool, backgroundColor: UIColor, animated: Bool) {
-        let duration = animated ? 0.25 : 0.0
-        
-        UIView.animate(withDuration: duration) {
-            self.tableView.backgroundColor = .background
-            self.navigationController?.navigationBar.backgroundColor = backgroundColor
-            self.navigationController?.navigationBar.viewWithTag(1001)?.isHidden = hiddenUnderline
-        }
-    }
 }
+
+
 

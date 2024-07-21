@@ -8,57 +8,23 @@
 import UIKit
 import KidsNoteGoogleBookTask
 
-class BookTableViewCell: UITableViewCell {
+class BookTableViewCell: BaseTableViewCell {
     
-    let bookImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 4
-        return imageView
-    }()
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.numberOfLines = 2
-        return label
-    }()
-    
-    let authorLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
-        return label
-    }()
-    
-    let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .systemGray
-        return label
-    }()
-    
-    let eBookLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .systemGray
-        return label
-    }()
-    
-    let ratingImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(systemName: "star.fill")
-        imageView.tintColor = .systemGray
-        return imageView
-    }()
+    private var bookImageView: UIImageView!
+    private var titleLabel: UILabel!
+    private var authorLabel: UILabel!
+    private var ratingLabel: UILabel!
+    private var eBookLabel: UILabel!
+    private var ratingImageView: UIImageView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
@@ -68,10 +34,6 @@ class BookTableViewCell: UITableViewCell {
         } else {
             contentView.alpha = 1
         }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func prepareForReuse() {
@@ -87,20 +49,19 @@ class BookTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.selectionStyle = .none
+        bookImageView = createImageView(contentMode: .scaleAspectFill, cornerRadius: 4)
+        titleLabel = createLabel(font: .boldSystemFont(ofSize: 16), numberOfLines: 2)
+        authorLabel = createLabel(font: .systemFont(ofSize: 14), textColor: .gray)
+        ratingLabel = createLabel(font: .systemFont(ofSize: 14), textColor: .systemGray)
+        eBookLabel = createLabel(font: .systemFont(ofSize: 14), textColor: .systemGray)
+        ratingImageView = createImageView(image: UIImage(systemName: "star.fill"), tintColor: .systemGray)
+        
         contentView.addSubview(bookImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(authorLabel)
         contentView.addSubview(ratingLabel)
         contentView.addSubview(ratingImageView)
         contentView.addSubview(eBookLabel)
-        self.backgroundColor = .background
-        bookImageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        ratingLabel.translatesAutoresizingMaskIntoConstraints = false
-        ratingImageView.translatesAutoresizingMaskIntoConstraints = false
-        eBookLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             bookImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
@@ -127,7 +88,6 @@ class BookTableViewCell: UITableViewCell {
             ratingImageView.centerYAnchor.constraint(equalTo: eBookLabel.centerYAnchor),
             ratingImageView.widthAnchor.constraint(equalToConstant: 14),
             ratingImageView.heightAnchor.constraint(equalToConstant: 14),
-            
         ])
     }
     
@@ -150,4 +110,5 @@ class BookTableViewCell: UITableViewCell {
         bookImageView.loadImage(from: url)
     }
 }
+
 

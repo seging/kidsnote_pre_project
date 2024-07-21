@@ -7,14 +7,8 @@
 
 import UIKit
 
-class NoResultsTableViewCell: UITableViewCell {
-    let noResultsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "검색 결과 없음"
-        label.textAlignment = .center
-        label.textColor = .secondaryLabel
-        return label
-    }()
+class NoResultsTableViewCell: BaseTableViewCell {
+    private var noResultsLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,15 +20,19 @@ class NoResultsTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
+        noResultsLabel = createLabel(text: "검색 결과 없음", textColor: .secondaryLabel, textAlignment: .center)
+        
         contentView.addSubview(noResultsLabel)
-        noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.selectionStyle = .none
-        self.backgroundColor = .background
+        
         NSLayoutConstraint.activate([
             noResultsLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             noResultsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             noResultsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             noResultsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
+    }
+    
+    func updateResult(msg:String) {
+        noResultsLabel.text = msg
     }
 }

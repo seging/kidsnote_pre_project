@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73AED4752C4C9F3F00FF5256 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AED4742C4C9F3F00FF5256 /* BaseViewController.swift */; };
+		73AED4772C4CA91C00FF5256 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AED4762C4CA91C00FF5256 /* BaseTableViewCell.swift */; };
 		73D0A9172C494BFF00D0387E /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0A9162C494BFF00D0387E /* CustomSearchView.swift */; };
 		73D0A9212C4A75D800D0387E /* BookInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0A9202C4A75D800D0387E /* BookInfoCell.swift */; };
 		73D0A9232C4A75F300D0387E /* ButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0A9222C4A75F300D0387E /* ButtonsCell.swift */; };
@@ -67,6 +69,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		73AED4742C4C9F3F00FF5256 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		73AED4762C4CA91C00FF5256 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		73D0A9162C494BFF00D0387E /* CustomSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchView.swift; sourceTree = "<group>"; };
 		73D0A9202C4A75D800D0387E /* BookInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoCell.swift; sourceTree = "<group>"; };
 		73D0A9222C4A75F300D0387E /* ButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsCell.swift; sourceTree = "<group>"; };
@@ -124,6 +128,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73AED4782C4CB22E00FF5256 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5C92C44E5DE00841711 /* BookSearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		73AED4792C4CB23400FF5256 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		73D0A9152C494BF400D0387E /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,9 +251,10 @@
 		73FCC5F32C45118500841711 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				73FCC5C92C44E5DE00841711 /* BookSearchViewController.swift */,
-				73FCC5FC2C4517C100841711 /* BookDetailViewController.swift */,
+				73AED4792C4CB23400FF5256 /* Detail */,
+				73AED4782C4CB22E00FF5256 /* Search */,
 				73FCC6092C462D0500841711 /* CustomSegmentedControl.swift */,
+				73AED4742C4C9F3F00FF5256 /* BaseViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +264,7 @@
 			children = (
 				73D0A91F2C4A75CF00D0387E /* Detail */,
 				73D0A91E2C4A75BA00D0387E /* Search */,
+				73AED4762C4CA91C00FF5256 /* BaseTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -391,12 +413,14 @@
 				73FCC6062C462B1100841711 /* NetworkErrorTableViewCell.swift in Sources */,
 				73FCC5992C44E3D900841711 /* AppDelegate.swift in Sources */,
 				73D0A92B2C4A768400D0387E /* PublishDateCell.swift in Sources */,
+				73AED4752C4C9F3F00FF5256 /* BaseViewController.swift in Sources */,
 				73FCC59B2C44E3D900841711 /* SceneDelegate.swift in Sources */,
 				73FCC5FD2C4517C100841711 /* BookDetailViewController.swift in Sources */,
 				73FCC6022C462AD900841711 /* ResultLabelTableViewCell.swift in Sources */,
 				73FC323A2C47658200CC9B86 /* LoadingCell.swift in Sources */,
 				73FCC6002C4573EE00841711 /* BookTableViewCell.swift in Sources */,
 				73FCC60A2C462D0500841711 /* CustomSegmentedControl.swift in Sources */,
+				73AED4772C4CA91C00FF5256 /* BaseTableViewCell.swift in Sources */,
 				73D0A9172C494BFF00D0387E /* CustomSearchView.swift in Sources */,
 				73FCC60D2C4645AA00841711 /* CustomSegmentedButton.swift in Sources */,
 				73D0A9272C4A764000D0387E /* DescriptionCell.swift in Sources */,

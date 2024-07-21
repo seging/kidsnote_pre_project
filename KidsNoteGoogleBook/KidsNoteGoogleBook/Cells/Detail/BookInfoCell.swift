@@ -8,81 +8,54 @@
 import UIKit
 import KidsNoteGoogleBookTask
 
-class BookInfoCell: UITableViewCell {
-    private let bookImageView:UIImageView = UIImageView()
-    private let titleLabel:UILabel =  {
-       let label = UILabel()
-        label.numberOfLines = 2
-        label.textColor = .label
-        label.font = .boldSystemFont(ofSize: 21)
-        return label
-    }()
-    private let authorLabel:UILabel =  {
-        let label = UILabel()
-         
-         label.textColor = .naviTint
-         label.font = .systemFont(ofSize: 14)
-         return label
-     }()
-    private let pageCountLabel:UILabel =  {
-        let label = UILabel()
-         
-         label.textColor = .naviTint
-         label.font = .systemFont(ofSize: 14)
-         return label
-     }()
-
+class BookInfoCell: BaseTableViewCell {
+    private var bookImageView:UIImageView!
+    private var titleLabel:UILabel!
+    private var authorLabel:UILabel!
+    private var pageCountLabel:UILabel!
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-        setupSeparatorInsets()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupSeparatorInsets() {
-        self.separatorInset = UIEdgeInsets.zero
-        self.layoutMargins = UIEdgeInsets.zero
-        
-    }
-
+    
+    
     private func setupUI() {
+        bookImageView = createImageView(cornerRadius: 4)
+        titleLabel = createLabel(font: .boldSystemFont(ofSize: 21), numberOfLines: 2)
+        authorLabel = createLabel(font: .systemFont(ofSize: 14), textColor: .naviTint)
+        pageCountLabel = createLabel(font: .systemFont(ofSize: 14), textColor: .naviTint)
+        
         contentView.addSubview(bookImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(authorLabel)
         contentView.addSubview(pageCountLabel)
-        self.selectionStyle = .none
-        self.backgroundColor = .background
-        bookImageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        pageCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        bookImageView.layer.cornerRadius = 4
         
         NSLayoutConstraint.activate([
             bookImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             bookImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             bookImageView.widthAnchor.constraint(equalToConstant: 100),
             bookImageView.heightAnchor.constraint(equalToConstant: 150),
-
-            titleLabel.topAnchor.constraint(equalTo: bookImageView.topAnchor,constant: 5),
+            
+            titleLabel.topAnchor.constraint(equalTo: bookImageView.topAnchor, constant: 5),
             titleLabel.leadingAnchor.constraint(equalTo: bookImageView.trailingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
-            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 5),
+            
+            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             authorLabel.leadingAnchor.constraint(equalTo: bookImageView.trailingAnchor, constant: 16),
             authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
-            pageCountLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor,constant: 5),
+            
+            pageCountLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 5),
             pageCountLabel.leadingAnchor.constraint(equalTo: bookImageView.trailingAnchor, constant: 16),
             pageCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
         ])
-
     }
-
+    
     func configure(with book: BookItem) {
         if let imageUrl = book.volumeInfo.imageLinks?.thumbnail {
             bookImageView.loadImage(from: URL(string: imageUrl)!)
@@ -92,4 +65,5 @@ class BookInfoCell: UITableViewCell {
         pageCountLabel.text = "eBook ∙ \(book.volumeInfo.pageCount ?? 0)페이지"
     }
 }
+
 

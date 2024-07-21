@@ -8,13 +8,13 @@
 import Foundation
 
 
-class GoogleBooksAPIService {
+final class GoogleBooksAPIService {
     private let networkService: NetworkServiceProtocol = NetworkService.shared
     static let shared = GoogleBooksAPIService()
     
     private init() {}
     
-    func searchBooks(query: String, startIndex:Int) async throws -> BookResponse {
+    final func searchBooks(query: String, startIndex:Int) async throws -> BookResponse {
         let queryItems = [
             "q=\(query)",
             "startIndex=\(startIndex)",
