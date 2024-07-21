@@ -11,7 +11,7 @@ import Combine
 class BaseViewController: UIViewController {
     var cancellables = Set<AnyCancellable>()
     let tableView = UITableView()
-    let refreshControl = UIRefreshControl()
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()

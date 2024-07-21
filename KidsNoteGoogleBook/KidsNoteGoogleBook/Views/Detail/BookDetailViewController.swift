@@ -33,13 +33,14 @@ class BookDetailViewController: BaseViewController {
     override func setupTableView() {
         super.setupTableView()
         self.registerCells()
+        tableView.refreshControl = nil
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.refreshControl.isHidden = true
     }
     
     private func setupUI() {
         self.view.backgroundColor = .background
+        
         setupNavigationBar()
         setupTableView()
     }

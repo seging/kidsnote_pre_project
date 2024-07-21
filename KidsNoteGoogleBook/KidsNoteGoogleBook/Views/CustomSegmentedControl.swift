@@ -10,11 +10,13 @@ import UIKit
 class CustomSegmentedControl: UIView {
     private var buttons: [CustomSegmentedButton] = []
     private var selector: UIView!
+    private var underline: UIView!
     var selectedSegmentIndex: Int = 0
     var buttonTitles: [String]!
     var textColor: UIColor = .secondaryLabel
     var selectorColor: UIColor = .selectedTab
     var selectorTextColor: UIColor = .selectedTab
+    var underlineColor: UIColor = .selectedTab // 언더라인 색상
     
     var segmentValueChangedHandler: ((Int) -> Void)?
     var textSizes: [CGFloat] = []
@@ -31,6 +33,7 @@ class CustomSegmentedControl: UIView {
     private func updateView() {
         createButtons()
         configureSelector()
+        configureUnderline()
         layoutButtons()
     }
     
@@ -59,6 +62,15 @@ class CustomSegmentedControl: UIView {
         applyTopCornerRadius()
     }
     
+    private func configureUnderline() {
+        let buttonWidth = frame.width / CGFloat(buttonTitles.count)
+        let underlineWidth = textSizes[0]
+        let underlineX = (buttonWidth - underlineWidth) / 2
+        underline = UIView(frame: CGRect(x: underlineX, y: self.frame.height - 1, width: underlineWidth, height: 2))
+        underline.backgroundColor = underlineColor
+        addSubview(underline)
+    }
+    
     private func layoutButtons() {
         let buttonWidth = frame.width / CGFloat(buttonTitles.count)
         for (index, button) in buttons.enumerated() {
@@ -72,10 +84,15 @@ class CustomSegmentedControl: UIView {
         let buttonWidth = frame.width / CGFloat(buttonTitles.count)
         let selectorX = buttonWidth * CGFloat(selectedSegmentIndex) + (buttonWidth - selectorWidth) / 2
         
+        let underlineWidth = textSizes[selectedSegmentIndex]
+        let underlineX = buttonWidth * CGFloat(selectedSegmentIndex) + (buttonWidth - underlineWidth) / 2
         
-        self.selector.frame = CGRect(x: selectorX, y: self.frame.height - 2, width: selectorWidth, height:self.selector.frame.height)
+        UIView.animate(withDuration: 0.3) {
+            self.selector.frame = CGRect(x: selectorX, y: self.frame.height - 3, width: selectorWidth, height: self.selector.frame.height)
+            self.underline.frame = CGRect(x: underlineX, y: self.frame.height - 1, width: underlineWidth, height: self.underline.frame.height)
+        }
+        
         self.applyTopCornerRadius()
-        
     }
     
     @objc private func buttonTapped(button: UIButton) {
@@ -114,3 +131,4 @@ class CustomSegmentedControl: UIView {
         selector.layer.mask = mask
     }
 }
+
